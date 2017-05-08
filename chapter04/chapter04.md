@@ -74,7 +74,7 @@ guanghui.mother.sayName();  //Alice
 
 * call: first param passes the obj which indicates "this", other params are regular params. Invoke immediately.
 * apply: first param passes the obj which indicates "this", the second is array. Invoke immediately.
-* bind: first param passes the obj which indicates "this", return a function, which can be invoked later.
+* bind: first param passes the obj which indicates "this", return a function specifying the context ("this" keyword) inside that function, which can be invoked later.
 
 ```javascript
 var me = {
