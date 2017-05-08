@@ -26,7 +26,7 @@ ReactDOM.render(<HelloWorld name='Tyler' />, document.getElementById('app'))
 
 Notice React **passes props to your function as the first argument** to the function so there is **no "this" keyword**. This is a lot **cleaner and makes creating React components more natural** since you're literally just making a function. **It's a good idea to try to use as many Stateless Functional Components as possible because then you have a good separation of presentational components vs other components.**
 
-# Seperate presentational components and container components
+# Separate presentational components and container components
 
 * write presentational components as stateless function components
 * write container components as class with state, pass state as prop into presentational components

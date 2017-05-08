@@ -4,4 +4,5 @@
 * chapter02: Dataflow with Props
 * chapter03: Pure Functions, Props, PropTypes
 * chapter04: "this" keyword recap, managing/updating state
-* chapter05: Stateless Functional Components, Seperate presentational components and container components
+* chapter05: Stateless Functional Components, Separate presentational components and container components
+* chapter06: Life Cycle Events + Ajax by axios
