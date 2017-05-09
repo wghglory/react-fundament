@@ -12,3 +12,4 @@
 * chapter09: Dynamic Rendering + Query Params
 * chapter10: Javascript Array.reduce. Axios, Promises, Github API, props.children
 * chapter11: Reusable React Component via props, defaultProps
+* chapter12: Eslint fix errors, Production + Hosting via firebase
