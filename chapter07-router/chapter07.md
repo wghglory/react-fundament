@@ -1,3 +1,5 @@
+We're going to build Navbar by react router
+
 # react-router-dom
 
 Route exact means exactly match the path. Take `<Route exact path='/' component={Home} />` for example. If we navigate to _localhost/popular_, without exact keyword, Home component still matches this route.
