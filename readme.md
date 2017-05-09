@@ -10,3 +10,4 @@
 * [] **todo: https://reacttraining.com/react-router/web/example/url-params**
 * chapter08: Controlled Component vs Uncontrolled Component, Forms, Update parent's state in child component
 * chapter09: Dynamic Rendering + Query Params
+* chapter10: Javascript Array.reduce. Axios, Promises, Github API, props.children
