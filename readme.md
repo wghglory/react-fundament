@@ -13,3 +13,7 @@
 * chapter10: Javascript Array.reduce. Axios, Promises, Github API, props.children
 * chapter11: Reusable React Component via props, defaultProps
 * chapter12: Eslint fix errors, Production + Hosting via firebase
+
+---
+
+* chapter13: css separation from js, webpack scss loader. css, scss build together by webpack
