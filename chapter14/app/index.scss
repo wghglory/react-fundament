@@ -1,5 +1,3 @@
-$width:1200px;
-$centerElement:0 auto;
 $red:#d0021b;
 $buttonColor:#e6e6e6;
 $buttonBackground:#0a0a0a;
@@ -7,18 +5,20 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
-.container {
-  max-width: $width;
-  margin: $centerElement;
-}
-
 a {
   text-decoration: none;
   color: $red;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    color: $red;
+    text-decoration: none;
+  }
 }
 
 ul {
-  padding: 0;
+  padding: 0
 }
 
 li {
@@ -127,16 +127,4 @@ li {
   text-align: center;
   font-size: 30px;
   font-weight: 200;
-}
-
-.reset {
-  border: none;
-  background: transparent;
-  color: $red;
-  display: block;
-  width: 100%;
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
 }

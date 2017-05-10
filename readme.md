@@ -12,8 +12,9 @@
 * chapter09: Dynamic Rendering + Query Params
 * chapter10: Javascript Array.reduce. Axios, Promises, Github API, props.children
 * chapter11: Reusable React Component via props, defaultProps
-* chapter12: Eslint fix errors, Production + Hosting via firebase
+* chapter12: Eslint fix errors, Production + Hosting via firebase (_**Good for Presentation**_)
 
 ---
 
-* chapter13: css separation from js, webpack scss loader. css, scss build together by webpack
+* chapter13: CSS separation from js, webpack scss-loader, webpack build css and scss together
+* chapter14: Use bootstrap 4. Use ES6 import instead of CommonJs require. **Webpack config separate dev and prod**
