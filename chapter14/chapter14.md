@@ -62,6 +62,84 @@ Now in App.js
 + import Home from './Home';
 ```
 
+# Animation
+
+* Native css3 animation for h1 with className animation.
+* animation for Battle Link by react-addons-css-transition-group
+
+Home.js
+
+```diff
+const React = require('react');
+const Link = require('react-router-dom').Link;
++ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+export default class Home extends React.Component {
+  render() {
+    return (
+      <div className="home-container jumbotron">
++       <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-addons-css-transition-group.</h1>
++       <ReactCSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
++          transitionEnterTimeout={2000} transitionLeaveTimeout={500}>
+          <Link className="button" to="/battle">Battle</Link>
++       </ReactCSSTransitionGroup>
+      </div>
+    );
+  }
+}
+```
+
+index.scss
+
+```scss
+// native css3 animation
+.animation {
+  animation: h1animation 2s;
+}
+
+@keyframes h1animation {
+  0% {
+    transform: scale(0.5);
+    color: $red;
+  }
+  100% {
+    transform: scale(1);
+    color: $buttonBackground;
+  }
+}
+
+// react-addons-css-transition-group animation
+.animation-appear {
+  opacity: 0.01;
+  transform: scale(0.5);
+  color: $red;
+  &.animation-appear-active {
+    opacity: 1;
+    color: $buttonBackground;
+    transform: scale(1);
+    transition: all 2s ease-in;
+  }
+}
+
+.animation-enter {
+  opacity: 0.01;
+  &-active {
+    opacity: 1;
+    transform: scale(0.5);
+    transition: all 2s ease-in;
+  }
+}
+
+.animation-leave {
+  opacity: 1;
+  &-active {
+    opacity: 0;
+    transform: scale(1);
+    transition: all .5s ease-out;
+  }
+}
+```
+
 # Webpack dev, production 2 files
 
 1. create a webpack.production.config.js
