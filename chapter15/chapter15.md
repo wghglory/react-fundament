@@ -119,3 +119,87 @@ Chart.defaultProps = {
   height: '250'
 };
 ```
+
+# Use Javascript fetch API instead of axios
+
+As of May 11, 2017, [fetch is still an experimental technology](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Its api may change in future.
+
+utils/api.js
+
+```diff
+const axios = require('axios');
+
+function getProfile(username) {
+-   return axios.get('https://api.github.com/users/' + username + params).then(user => user.data);
++   return fetch('https://api.github.com/users/' + username + params).then(res => res.json());
+}
+
+function getRepos(username) {
+-   return axios.get('https://api.github.com/users/' + username + '/repos' + params + '&per_page=100');
++   return fetch('https://api.github.com/users/' + username + '/repos' + params + '&per_page=100').then(res => res.json());
+}
+
+// get total stars for all his repos
+function getStarCount(repos) {
+   // use axios:
+-  return repos.data.reduce(function (count, repo) {
+-     return count + repo.stargazers_count;
+-  }, 0);
+
+  // use fetch
++  return repos.reduce(function (count, repo) {
++    return count + repo.stargazers_count;
++  }, 0);
+}
+
+...
+
+function getUserData(player) {
+-  // return axios.all([
+  //   getProfile(player),
+  //   getRepos(player)
+  // ]).then(function (data) {
+  //   const profile = data[0];
+  //   const repos = data[1];
+
+  //   return {
+  //     profile: profile,
+  //     score: calculateScore(profile, repos)
+  //   };
+  // });
+
+  // use fetch
++  return Promise.all([
+    getProfile(player),
+    getRepos(player)
+  ]).then(function (data) {
+    const profile = data[0];
+    const repos = data[1];
+
+    return {
+      profile: profile,
+      score: calculateScore(profile, repos)
+    };
+  });
+}
+
+module.exports = {
+  battle: function (players) {
+-    // return axios.all(players.map(getUserData))
+    //   .then(sortPlayers)
+    //   .catch(handleError);
+
+    // use fetch
++    return Promise.all(players.map(getUserData))
+      .then(sortPlayers)
+      .catch(handleError);
+  },
+  
+  fetchPopularRepos: function (language) {
+    const encodedURI = window.encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
+
+-    // return axios.get(encodedURI).then((response) => response.data.items);
++    return fetch(encodedURI).then(res => res.json()).then(p => p.items);
+  }
+};
+```
