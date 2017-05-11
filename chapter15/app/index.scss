@@ -1,0 +1,179 @@
+$red:#d0021b;
+$buttonColor:#e6e6e6;
+$buttonBackground:#0a0a0a;
+// native css3 animation
+.animation {
+  animation: h1animation 2s;
+}
+
+@keyframes h1animation {
+  0% {
+    transform: scale(0.5);
+    color: $red;
+  }
+  100% {
+    transform: scale(1);
+    color: $buttonBackground;
+  }
+}
+
+// react-addons-css-transition-group animation
+.animation-appear {
+  opacity: 0.01;
+  transform: scale(0.5);
+  color: $red;
+  &.animation-appear-active {
+    opacity: 1;
+    color: $buttonBackground;
+    transform: scale(1);
+    transition: all 2s ease-in;
+  }
+}
+
+.animation-enter {
+  opacity: 0.01;
+  &-active {
+    opacity: 1;
+    transform: scale(0.5);
+    transition: all 2s ease-in;
+  }
+}
+
+.animation-leave {
+  opacity: 1;
+  &-active {
+    opacity: 0;
+    transform: scale(1);
+    transition: all .5s ease-out;
+  }
+}
+
+// custom css
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: $red;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    color: $red;
+    text-decoration: none;
+  }
+}
+
+ul {
+  padding: 0
+}
+
+li {
+  list-style-type: none;
+}
+
+.button {
+  color: $buttonColor;
+  background: $buttonBackground;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  width: 200px;
+  text-align: center;
+  display: block;
+  padding: 7px 0;
+  margin: 10px auto;
+  &:hover:enabled {
+    background: linear-gradient(#1a1a1a, $buttonBackground);
+    color: #fff;
+    text-decoration: none;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.space-list-items {
+  margin-bottom: 7px;
+}
+
+.languages {
+  display: flex;
+  justify-content: center;
+  li {
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.popular-item {
+  margin: 20px;
+  text-align: center;
+}
+
+.popular-rank {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  padding-top: 20px;
+  li {
+    margin-right: 15px;
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+  input {
+    border-radius: 3px;
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.43);
+    font-size: 16px;
+    width: 80%;
+  }
+  label {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+  }
+}
+
+.header {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 200;
+}

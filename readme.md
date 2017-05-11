@@ -18,3 +18,4 @@
 
 * chapter13: CSS separation from js, webpack scss-loader, webpack build css and scss together
 * chapter14: Use bootstrap 4. Native and react-addons-css-transition-group Animation. Use ES6 import instead of CommonJs require. **Webpack config separate dev and prod**
+* chapter15: React Data Visualization (Chart.js, just.randomcolor), load data from json, csv
