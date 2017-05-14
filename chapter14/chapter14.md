@@ -166,16 +166,3 @@ index.scss
 2. package.json scripts: `"build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",`
 
 Now when you build for production, css name can be changed like "build.min.css"
-
-# Use .babelrc
-
-We have our babel config in package.json. It's better to extract it and put into .babelrc
-
-```json
-{
-  "presets": [
-    "env",
-    "react"
-  ]
-}
-```

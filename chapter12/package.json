@@ -15,6 +15,9 @@
     "presets": [
       "react",
       "env"
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
     ]
   },
   "devDependencies": {
@@ -22,6 +25,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "css-loader": "^0.28.1",
     "eslint-plugin-react": "^7.0.0",
     "html-webpack-plugin": "^2.28.0",
