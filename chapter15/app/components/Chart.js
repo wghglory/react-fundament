@@ -9,6 +9,8 @@ export default class Chart extends React.Component {
   componentDidMount() {
     this.createChart();
   }
+
+  // avoid memory leak
   componentWillUnmount() {
     this.killChart();
   }

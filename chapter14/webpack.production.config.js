@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html injecting index_bundle.js in dist folder
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //remove duplicates
 
 const config = {
   entry: './app/index.js',
@@ -49,7 +50,12 @@ const config = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new OptimizeCssAssetsPlugin({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    })
   ]
 };
 

@@ -17,7 +17,7 @@ In this chapter, we want to create a new router called Visualization. Then load 
 
 # Install chart.js and just.randomcolor
 
-Visualization.js
+Visualization.js: we created alert.scss and import it to this component
 
 ```jsx
 import React from 'react';
@@ -25,6 +25,8 @@ import Data from '../data/data.json';
 import Chart from './Chart';
 import { array2chart } from '../utils/array2chart';
 import rawData from '../data/data.csv';
+
+import '../bootstrap/alert.scss';    
 
 const chartData = {
   type: "bar", //radar, bar, horizontalBar, line
@@ -59,7 +61,9 @@ export default function Visualization() {
 }
 ```
 
-Chart.js
+Chart.js: 
+
+> note `ref` is jquery-like way to get element. Using `ref` is uncontrolled component. Don't use unless necessary.
 
 ```jsx
 import React from 'react';
@@ -73,6 +77,8 @@ export default class Chart extends React.Component {
   componentDidMount() {
     this.createChart();
   }
+
+  // avoid memory leak
   componentWillUnmount() {
     this.killChart();
   }

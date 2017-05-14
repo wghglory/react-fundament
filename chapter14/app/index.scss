@@ -1,7 +1,6 @@
 $red:#d0021b;
 $buttonColor:#e6e6e6;
 $buttonBackground:#0a0a0a;
-
 // native css3 animation
 .animation {
   animation: h1animation 2s;
@@ -55,9 +54,10 @@ body {
 }
 
 a {
-  text-decoration: none;
   color: $red;
+  text-decoration: none;
   &:hover {
+    color: $red;
     text-decoration: none;
   }
   &:focus {
@@ -138,6 +138,7 @@ li {
 
 .nav {
   display: flex;
+  padding-top: 20px;
   li {
     margin-right: 15px;
   }

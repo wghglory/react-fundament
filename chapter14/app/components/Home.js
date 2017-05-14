@@ -2,6 +2,8 @@ const React = require('react');
 const Link = require('react-router-dom').Link;
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import '../bootstrap/jumbotron.scss';
+
 export default class Home extends React.Component {
   render() {
     return (

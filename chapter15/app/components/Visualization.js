@@ -4,6 +4,8 @@ import Chart from './Chart';
 import { array2chart } from '../utils/array2chart';
 import rawData from '../data/data.csv';
 
+import '../bootstrap/alert.scss';
+
 const chartData = {
   type: "bar", //radar, bar, horizontalBar, line
   data: array2chart(rawData),

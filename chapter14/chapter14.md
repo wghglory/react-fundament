@@ -1,39 +1,59 @@
 # Introduct bootstrap 4
 
-Bootstrap 4 is built by Scss rather than Less!
+Bootstrap 4 is built by Scss rather than Less! I don't want to import the whole bootstrap. In this chapter, I want to use bootstrap button and jumbotron. Let's see we're gonna achieve this feature.
 
-## Create bootstrap folder under app
+## 1. Create bootstrap folder under app
 
 * _core.scss is copied partially form `node_modules/bootstrap.scss`
-* _variables.scss is copied fomr `node_modules/bootstrap`
-* jumbotron.scss is created and import _core.scss
+* jumbotron.scss is created and import "variables" and "mixins"
 
-## Use these scss and custom scss
+## 2. Use these scss and custom scss
 
 Entry file -- index.js:
 
 ```jsx
-// bootstrap core 
+// bootstrap core. specific plugin like jumbotron is imported in needed component.
 import './bootstrap/_core.scss';
-// import './bootstrap/jumbotron.scss';  //question: jumbotron.scss internally import _core.scss, how to avoid duplicate?
 
-// custom css overrides bootstrap
+// custom css below bootstrap
 require('./index.css');
 require('./index.scss');
 ```
 
-## Issue
+## 3. Import bootstrap specific scss for specific component
 
-1. I don't want jumbotron.scss to be imported in index.js
-1. Also, I don't want it is included in _core.scss
-1. I want it to be imported only in the component needed
+App/Home.js import bootstrap jumbotron.css
 
-But if I do that, 
+```javascript
+import '../bootstrap/jumbotron.scss';
+```
 
-1. `@import "./core";` cannot be deleted in order to make `@import "../../node_modules/bootstrap/scss/jumbotron";` works
-1. Since `@import "./core"` seems a must, it will override the index.scss
+**The good things above**:
 
-Last, I don't want _core.scss duplicates in build.css. Not sure how webpack handle scss duplicates. 
+1. each component can have its own scss files
+1. bootstrap core styles are overrided by our custom css
+1. component's bootstrap scss won't conflicts with our custom css, although they load later than custom css
+
+## Remove duplicate css
+
+> One more issue: you may notice that jumbotron, _core.scss both have some `variables` and `mixins` duplicates. Someday we may need a alert.scss, which also have these. To remove duplicates, install `optimize-css-assets-webpack-plugin`
+
+in webpack.production.config.js
+
+```javascript
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //remove duplicates
+
+plugins: [
+    ...
+    new OptimizeCssAssetsPlugin({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    })
+  ]
+```
+
+Now, there should be no duplicate css.
 
 # Use ES6 import instead CommonJS require
 
@@ -146,3 +166,16 @@ index.scss
 2. package.json scripts: `"build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",`
 
 Now when you build for production, css name can be changed like "build.min.css"
+
+# Use .babelrc
+
+We have our babel config in package.json. It's better to extract it and put into .babelrc
+
+```json
+{
+  "presets": [
+    "env",
+    "react"
+  ]
+}
+```
