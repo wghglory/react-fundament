@@ -19,21 +19,16 @@ export function initTasks() {
 }
 
 export function addTask(packt) {
-  addTaskSync(packt);
+  dispatcher.dispatch({ type: ACT.ADD_TASK, payload: packt });
 
   // ajax({
   //   url: 'api/task',
   //   data: packt,
   //   successHook: (task) => {
+  //     dispatcher.dispatch({ type: ACT.ADD_TASK, payload: task });
   //     addTaskSync(task);
   //   }
   // });
-}
-
-
-export function addTaskSync(packt) {
-  // transform data if needed
-  dispatcher.dispatch({ type: ACT.ADD_TASK, payload: packt });
 }
 
 export function removeTask(packt) {

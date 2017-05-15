@@ -18,7 +18,13 @@ flux one way data flow just as react:
 
 view(jsx) --> actions --> dispatcher(singleton, make sure action is handler one by one) --> stores(read only) --> back to view
 
-> flow: view element click event --> eventHandler calls action --> action function calls dispatcher, send actionType and data --> store manages data internally according to the actionType and data from dispatcher
+### Flow in detail:
+
+1. component element click event --> eventHandler calls action 
+2. action function sends ajax to server, callback calls dispatcher
+3. dispatcher sends actionType and data to store
+4. store manages data internally according to the actionType, data from dispatcher, then emit event. 
+5. Component listener, registered in componentDidMount, notices that and setState, which calls store getTasks(). State update will re-render.
 
 <img src="http://om1o84p1p.bkt.clouddn.com/flux.png"  />
 
