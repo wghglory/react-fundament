@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html injecting index_bundle.js in dist folder
+// const HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html injecting index_bundle.js in dist folder
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //remove duplicates
@@ -49,9 +49,9 @@ const config = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'app/index.html'
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: 'app/index.html'
+    // }),
     new ExtractTextPlugin('build.min.css'),
     // NODE_ENV in DefinePlugin: webpack will build this into bundle.js so React realizes it's for production now
     new webpack.DefinePlugin({
