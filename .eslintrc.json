@@ -11,12 +11,16 @@
     },
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "experimentalObjectRestSpread": true
         },
         "sourceType": "module"
     },
     "rules": {
-        "semi": [ 2, "always"],
+        "semi": [
+            2,
+            "always"
+        ],
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "no-undef": "warn",

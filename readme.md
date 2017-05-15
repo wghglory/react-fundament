@@ -19,3 +19,4 @@
 * chapter13: SASS: CSS separation from js, webpack scss-loader, webpack build css and scss together
 * chapter14: **Use bootstrap 4 and remove duplicate css**. Native and react-addons-css-transition-group Animation. Use ES6 import instead of CommonJs require. **Webpack config separate dev and prod**
 * chapter15: React Data Visualization (Chart.js, just.randomcolor), load data from json, csv. Use **fetch** instead of axios
+* chapter16: Create todo tasks by Flux(action, dispatcher, store)
