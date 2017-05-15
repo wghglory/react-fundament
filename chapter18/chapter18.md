@@ -8,17 +8,17 @@ index.ejs:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Comatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, intial-scale=1">
-	<title>
-		<%- title %>
-	</title>
-	<link href="/build.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Comatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, intial-scale=1">
+  <title>
+    <%- title %>
+  </title>
+  <link href="/build.css" rel="stylesheet">
 </head>
 <body>
-		<%- body %>
-		<script src="/index_bundle.js"></script>
+  <%- body %>
+  <script src="/index_bundle.js"></script>
 </body>
 </html>
 ```
