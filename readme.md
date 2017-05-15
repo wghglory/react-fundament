@@ -21,3 +21,4 @@
 * chapter15: React Data Visualization (Chart.js, just.randomcolor), load data from json, csv. Use **fetch** instead of axios
 * chapter16: Create todo tasks by Flux(action, dispatcher, store)
 * chapter17: Add nodejs server, but still client-side rendering. Use `connect-history-api-fallback` to fix client-side routing
+* chapter18: server rendering with ejs template

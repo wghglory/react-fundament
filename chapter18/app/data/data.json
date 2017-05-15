@@ -1,0 +1,14 @@
+{
+  "name": "Guanghui",
+  "age": 25,
+  "smart": true,
+  "friends": [
+    "Yuhan",
+    "Sam",
+    "Samanta"
+  ],
+  "eyes": {
+    "left": "green",
+    "right": "brown"
+  }
+}

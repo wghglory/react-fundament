@@ -11,6 +11,7 @@ const config = {
     filename: 'index_bundle.js',
     publicPath: '/'
   },
+  devtool: 'cheap-module-source-map',
   devServer: {
     historyApiFallback: true,
   },
@@ -50,7 +51,9 @@ const config = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true
+    }),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
       cssProcessorOptions: { discardComments: { removeAll: true } },
