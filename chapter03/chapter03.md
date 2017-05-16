@@ -114,6 +114,42 @@ friends.splice(0, 1) // ["Dan"]
 
 `.splice` is not a pure function since each time we invoke it passing in the same arguments, we get a different result. It's also modifying state.
 
+## Array, Object pure vs impure
+
+```javascript
+function addToArrayImpure(array, element) {
+  array.push(element);
+  return array;
+}
+
+function addToArrayPure(array, element) {
+  return [...array, element];
+  // return array.concat(element);
+}
+
+function addToObjImpure(obj, prop, value) {
+  obj[prop] = value;
+  return obj;
+}
+
+function addToObjPure(obj, prop, value) {
+  return Object.assign({}, obj, {
+    [prop]: value
+  });
+}
+
+// ES7
+function addToObjPureSpread(obj, prop, value) {
+  return {
+    ...obj,
+    [prop]: value
+  };
+}
+
+let person = { name: 'guanghui' };
+console.log(addToObjPure(person, 'age', 20));
+```
+
 # Why does React use pure functions? 
 
 The main reason is React's render method needs to be a pure function and because it's a pure function, all of the benefits of pure functions now apply to your UI as well. Another reason is that it's a good idea to get used to making your functions pure and pushing "side effects" to the boundaries of your program.

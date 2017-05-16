@@ -7,7 +7,7 @@
 
 import EventEmitter from 'events';
 import dispatcher from '../dispatcher';
-import * as ACT from '../constants';
+import * as ACT from '../constants/tasks.actionTypes';
 import { initTasks } from '../actions/tasks.client.action';
 
 class TasksStore extends EventEmitter {

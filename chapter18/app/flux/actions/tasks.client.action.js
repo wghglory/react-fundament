@@ -3,7 +3,7 @@
  */
 
 import dispatcher from '../dispatcher';
-import * as ACT from '../constants';
+import * as ACT from '../constants/tasks.actionTypes';
 import { ajax } from '../../utils/ajax';
 
 export function initTasks() {
