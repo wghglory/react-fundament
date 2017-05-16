@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "server:dev": "webpack && nodemon server",
-    "server:prod": "npm run build && node server",
+    "start": "webpack && nodemon server",
+    "prod": "npm run build && NODE_ENV=production node server",
     "build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",
     "firebase-init": "firebase login && firebase init",
     "deploy": "npm run build && firebase deploy"

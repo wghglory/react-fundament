@@ -18,20 +18,21 @@ export default class Tasks extends React.Component {
     };
 
     this.addNewTask = this.addNewTask.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  _onChange() {
+    this.setState({ tasks: taskStore.getTasks() });
   }
 
   // after each action, store should emit an event, here react setState and get latest data from store
   componentDidMount() {
-    taskStore.on('change', this.getData.bind(this));
-  }
-
-  getData() {
-    this.setState({ tasks: taskStore.getTasks() });
+    taskStore.addChangeListener(this._onChange);
   }
 
   componentWillUnmount() {
     // taskStore.removeListener('change', this.getData.bind(this));   //this doesn't work, why?
-    taskStore.removeAllListeners('change');
+    taskStore.removeChangeListener(this._onChange);
   }
 
   addNewTask() {

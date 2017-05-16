@@ -18,6 +18,10 @@ export function initTasks() {
 
 export function addTask(packt) {
   // packt: {label: "a new task"}
+  if (packt.label === '') {
+    return;
+  }
+
   ajax({
     url: 'api/task',
     method: 'post',

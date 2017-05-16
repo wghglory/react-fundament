@@ -20,6 +20,14 @@ class TasksStore extends EventEmitter {
     this.operate = this.operate.bind(this);
   }
 
+  addChangeListener(cb) {
+    this.on('change', cb);
+  }
+
+  removeChangeListener(cb) {
+    this.removeListener('change', cb);
+  }
+
   initTasks(tasks) {
     this.tasks = tasks;
     this.emit('change');
@@ -37,7 +45,7 @@ class TasksStore extends EventEmitter {
   }
 
   removeTask({ _id }) {
-    this.tasks = this.tasks.filter((task) => task._id !== _id);    
+    this.tasks = this.tasks.filter((task) => task._id !== _id);
     this.emit('change');
   }
 
