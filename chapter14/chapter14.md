@@ -85,24 +85,26 @@ Now in App.js
 # Animation
 
 * Native css3 animation for h1 with className animation.
-* animation for Battle Link by react-addons-css-transition-group
+* animation for Battle Link by react-transition-group. 
+
+> Note: react-addons-css-transition-group won't work in React 16+
 
 Home.js
 
 ```diff
 const React = require('react');
 const Link = require('react-router-dom').Link;
-+ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
++ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 export default class Home extends React.Component {
   render() {
     return (
       <div className="home-container jumbotron">
 +       <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-addons-css-transition-group.</h1>
-+       <ReactCSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
++       <CSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
 +          transitionEnterTimeout={2000} transitionLeaveTimeout={500}>
           <Link className="button" to="/battle">Battle</Link>
-+       </ReactCSSTransitionGroup>
++       </CSSTransitionGroup>
       </div>
     );
   }

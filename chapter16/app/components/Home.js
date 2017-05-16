@@ -1,6 +1,6 @@
 const React = require('react');
 const Link = require('react-router-dom').Link;
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import '../bootstrap/jumbotron.scss';
 
@@ -9,10 +9,10 @@ export default class Home extends React.Component {
     return (
       <div className="home-container jumbotron">
         <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-addons-css-transition-group.</h1>
-        <ReactCSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
+        <CSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
           transitionEnterTimeout={2000} transitionLeaveTimeout={500}>
           <Link className="button" to="/battle">Battle</Link>
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
       </div>
     );
   }

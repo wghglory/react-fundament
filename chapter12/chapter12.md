@@ -6,6 +6,15 @@
 node_modules/.bin/eslint "app/**/*.js" --fix
 ```
 
+It's better to add this into package.json
+
+```json
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix"
+  },
+```
+
 # Webpack.config.js
 
 ```diff
@@ -58,6 +67,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html inj
 {
   "scripts": {
     "start": "webpack-dev-server --open",
+    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix",
 +    "build": "NODE_ENV='production' webpack -p",
 +    "firebase-init": "firebase login && firebase init",
 +    "deploy": "npm run build && firebase deploy"

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack && nodemon server",
+    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix",
     "prod": "npm run build && NODE_ENV=production node server",
     "build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",
     "firebase-init": "firebase login && firebase init",
@@ -47,8 +48,8 @@
     "prop-types": "^15.5.8",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
-    "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.1.3"
   }
 }
