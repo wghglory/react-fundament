@@ -89,37 +89,45 @@ tasks.client.store.js
 
 import EventEmitter from 'events';
 import dispatcher from '../dispatcher';
-import * as ACT from '../constants';
-import { initTasks } from '../actions/tasks.client.action';
+import * as ACT from '../constants/tasks.actionTypes';
 
 class TasksStore extends EventEmitter {
   constructor() {
     super();
 
     this.tasks = [];
-    initTasks();
 
     this.operate = this.operate.bind(this);
   }
 
+  addChangeListener(cb) {
+    this.on('change', cb);
+  }
+
+  removeChangeListener(cb) {
+    this.removeListener('change', cb);
+  }
+
   initTasks(tasks) {
-    this.tasks = tasks;
+    if (tasks) {
+      this.tasks = tasks;
+    }
     this.emit('change');
   }
 
   getTasks() {
-    return this.tasks.slice(0);  // copy a new arr, don't modify original since we need keep track of changes
+    return this.tasks;
   }
 
   addTask(task) {
-    const tasks = this.tasks.slice(0);
-    tasks.push(task);
-    this.tasks = tasks;
+    const temp = this.tasks.length === 0 ? [] : this.tasks.slice(0);   // copy a new arr, don't modify original since we need keep track of changes
+    temp.push(task);
+    this.tasks = temp;
     this.emit('change');
   }
 
   removeTask({ _id }) {
-    this.tasks = this.tasks.filter((task) => task._id !== _id);    
+    this.tasks = this.tasks.filter((task) => task._id !== _id);
     this.emit('change');
   }
 
@@ -158,35 +166,38 @@ import React from 'react';
 import Task from './task';
 import Button from '../bootstrap/Button';
 import taskStore from '../flux/stores/tasks.client.store';
-import { addTask } from '../flux/actions/tasks.client.action';
+import { addTask, initTasks } from '../flux/actions/tasks.client.action';
 
 export default class Tasks extends React.Component {
   constructor(props) {
     super(props);
+
+    initTasks();
 
     this.state = {
       tasks: taskStore.getTasks()
     };
 
     this.addNewTask = this.addNewTask.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  _onChange() {
+    this.setState({ tasks: taskStore.getTasks() });
   }
 
   // after each action, store should emit an event, here react setState and get latest data from store
   componentDidMount() {
-    taskStore.on('change', this.getData.bind(this));
-  }
-
-  getData() {
-    this.setState({ tasks: taskStore.getTasks() });
+    taskStore.addChangeListener(this._onChange);
   }
 
   componentWillUnmount() {
     // taskStore.removeListener('change', this.getData.bind(this));   //this doesn't work, why?
-    taskStore.removeAllListeners('change');
+    taskStore.removeChangeListener(this._onChange);
   }
 
   addNewTask() {
-    const tasks = this.state.tasks.slice(0);
+    const tasks = this.state.tasks.length === 0 ? [] : this.state.tasks.slice(0);
     /*
     1. call action with data. 
     2. action sends ajax post request to db, in callback dispatcher sends actionType, data to store

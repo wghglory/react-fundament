@@ -7,17 +7,19 @@ import React from 'react';
 import Task from './task';
 import Button from '../bootstrap/Button';
 import taskStore from '../flux/stores/tasks.client.store';
-import { addTask } from '../flux/actions/tasks.client.action';
+import { addTask, initTasks } from '../flux/actions/tasks.client.action';
 
 export default class Tasks extends React.Component {
   constructor(props) {
     super(props);
 
+    initTasks();
+
     this.state = {
       tasks: taskStore.getTasks()
     };
 
-    this.addNewTask = this.addNewTask.bind(this);
+    this.addHandler = this.addHandler.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -35,7 +37,7 @@ export default class Tasks extends React.Component {
     taskStore.removeChangeListener(this._onChange);
   }
 
-  addNewTask() {
+  addHandler() {
     /*
     1. call action with data. 
     2. action sends ajax post request to db, in callback dispatcher sends actionType, data to store
@@ -58,7 +60,7 @@ export default class Tasks extends React.Component {
       <div>
         <div className="addTask">
           <input className="form-control" ref={(a) => { this.input = a; }} type="text" />
-          <Button className="-secondary" onClick={this.addNewTask}>Add Task</Button>
+          <Button className="-secondary" onClick={this.addHandler}>Add Task</Button>
         </div>
         {taskArr}
       </div>

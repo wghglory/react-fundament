@@ -8,14 +8,12 @@
 import EventEmitter from 'events';
 import dispatcher from '../dispatcher';
 import * as ACT from '../constants/tasks.actionTypes';
-import { initTasks } from '../actions/tasks.client.action';
 
 class TasksStore extends EventEmitter {
   constructor() {
     super();
 
     this.tasks = [];
-    initTasks();
 
     this.operate = this.operate.bind(this);
   }
@@ -29,18 +27,20 @@ class TasksStore extends EventEmitter {
   }
 
   initTasks(tasks) {
-    this.tasks = tasks;
+    if (tasks) {
+      this.tasks = tasks;
+    }
     this.emit('change');
   }
 
   getTasks() {
-    return this.tasks.slice(0);  // copy a new arr, don't modify original since we need keep track of changes
+    return this.tasks;
   }
 
   addTask(task) {
-    const tasks = this.tasks.slice(0);
-    tasks.push(task);
-    this.tasks = tasks;
+    const temp = this.tasks.length === 0 ? [] : this.tasks.slice(0);   // copy a new arr, don't modify original since we need keep track of changes
+    temp.push(task);
+    this.tasks = temp;
     this.emit('change');
   }
 

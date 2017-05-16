@@ -7,11 +7,13 @@ import React from 'react';
 import Task from './task';
 import Button from '../bootstrap/Button';
 import taskStore from '../flux/stores/tasks.client.store';
-import { addTask } from '../flux/actions/tasks.client.action';
+import { addTask, initTasks } from '../flux/actions/tasks.client.action';
 
 export default class Tasks extends React.Component {
   constructor(props) {
     super(props);
+
+    initTasks();
 
     this.state = {
       tasks: taskStore.getTasks()
@@ -36,7 +38,7 @@ export default class Tasks extends React.Component {
   }
 
   addNewTask() {
-    const tasks = this.state.tasks.slice(0);
+    const tasks = this.state.tasks.length === 0 ? [] : this.state.tasks.slice(0);
     /*
     1. call action with data. 
     2. action sends ajax post request to db, in callback dispatcher sends actionType, data to store
