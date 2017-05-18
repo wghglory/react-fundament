@@ -23,3 +23,4 @@
 * chapter17: Add nodejs server, but still client-side rendering. Use `connect-history-api-fallback` to fix client-side routing
 * chapter18: server rendering with ejs template
 * chapter19: A counter demo -- **redux, flux** comparison
+* chapter20: Redux mapStateToProps, mapDispatchToProps, combineReducers
