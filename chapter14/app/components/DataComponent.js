@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DataComponent = (ComposedComponent, url) =>
+const DataComponent = (ComposedComponent, url) => (
   class DataComponent extends React.Component {
     constructor(props) {
       super(props);
@@ -36,6 +36,14 @@ const DataComponent = (ComposedComponent, url) =>
       this._getData();
     }
 
+    componentWillReceiveProps(nextProps) {
+      // console.log(nextProps.param);
+      // if param doesn't pass, maybe some other props, we don't want to call it
+      if (nextProps.param) {
+        this._getData(nextProps.param);
+      }
+    }
+
     render() {
       return (
         <div className="data-component">
@@ -46,6 +54,8 @@ const DataComponent = (ComposedComponent, url) =>
         </div>
       );
     }
-  };
+  }
+
+);
 
 export default DataComponent;

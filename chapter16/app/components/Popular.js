@@ -28,7 +28,7 @@ const Loading = require('./Loading');
 }*/
 
 function SelectedLanguage(props) {
-  const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
+  const languages = ['All', 'Javascript', 'Csharp', 'Java', 'Ruby', 'CSS', 'Python'];
 
   return (
     <ul className="languages">
@@ -133,7 +133,7 @@ class Popular extends React.Component {
 module.exports = Popular;*/
 
 
-/*// Solution 2:
+/*// Solution 2: HOC
 
 import DataComponent from './DataComponent';
 
@@ -165,24 +165,19 @@ const Popular = DataComponent(
 module.exports = Popular;*/
 
 
-// Solution 3
+/*// Solution 3: refs
 
 import DataComponent from './DataComponent';
 
 const RepoList = props => {
+  // console.log(props)
   return (
     <RepoGrid repos={props.data} />
   );
 };
 
 RepoList.propTypes = {
-  data: PropTypes.array.isRequired,
-  childCanUpdateMe: PropTypes.func,
-  param: PropTypes.object
-};
-
-RepoList.defaultProps = {
-  param: { lang: 'All' }
+  data: PropTypes.array.isRequired
 };
 
 const PopularView = DataComponent(
@@ -213,7 +208,55 @@ class Popular extends React.Component {
         <SelectedLanguage
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage} />
-        <PopularView ref={pv => this.pv = pv} />
+        <PopularView ref={pv => this.pv = pv}/>
+      </div>
+    );
+  }
+}
+
+module.exports = Popular;*/
+
+
+// Solution 4: componentWillReceiveProps
+import DataComponent from './DataComponent';
+
+const RepoList = props => <RepoGrid repos={props.data} />;
+
+RepoList.propTypes = {
+  data: PropTypes.array.isRequired
+};
+
+const PopularView = DataComponent(
+  RepoList,
+  window.encodeURI("https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories")
+);
+
+class Popular extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedLanguage: 'All'
+    };
+
+    this.updateLanguage = this.updateLanguage.bind(this);
+  }
+
+  updateLanguage(param) {
+    this.setState({ selectedLanguage: param.lang });
+    // solution 4 doesn't call below method to make new request and setState
+    // When selectedLanguage updates, PopularView's param props changes,
+    // DataComponent's componentWillReceiveProps(nextProps) will be called, where we fetch and setState
+    // this.pv.childCanUpdateMe(param);
+  }
+
+  render() {
+    return (
+      <div>
+        <SelectedLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage} />
+        <PopularView param={{ lang: this.state.selectedLanguage, url: `https://api.github.com/search/repositories?q=stars:>1+language:${this.state.selectedLanguage}&sort=stars&order=desc&type=Repositories` }} />
       </div>
     );
   }

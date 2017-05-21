@@ -1,10 +1,10 @@
-We're going to create a reusable Loading component
+# Create a reusable Loading component
 
-# Defaulting props with defaultProps
+## Defaulting props with defaultProps
 
 A large benefit of React is creating and consuming highly reusable components. If you think about strategies for **creating reusable components, a very important aspect is through props**. For example, if we were creating a reusable <Loading /> component, we would want the user to be able to specify certain properties that are specific to their application. For example, you'd want the user to be able to specify their own styles or specify what the actual loading text will be. But what if some users don't want to specify their own specific style or loading text but instead want to use some default text? This is where **defaultProps** comes into play. defaultProps allows you to sspecify what the default props will be in a component if those specific props aren't specified when the component is invoked.
 
-# Resuable Component, Solution 1
+## Resuable Component, Solution 1
 
 ```jsx
 class Loading extends React.Component {
@@ -252,7 +252,7 @@ Above is a good solution. It checks if api returns any data and decide which com
 
 Another good solution is `Higher Order Components`.
 
-# Higher Order Component -- best to reuse
+## Higher Order Component -- best to reuse
 
 A higher-order component, or HOC, is a simply a function that **takes a React component as an argument and returns another React component**. Typically, HOCs wrap the incoming component with a class that maintains state or has functionality. Higher-order components are the best way to reuse functionality across React components.
 
@@ -267,7 +267,7 @@ DataComponent.js:
 ```jsx
 import React from 'react';
 
-const DataComponent = (ComposedComponent, url) =>
+const DataComponent = (ComposedComponent, url) => (
   class DataComponent extends React.Component {
     constructor(props) {
       super(props);
@@ -303,6 +303,14 @@ const DataComponent = (ComposedComponent, url) =>
       this._getData();
     }
 
+    componentWillReceiveProps(nextProps) {
+      // console.log(nextProps.param);
+      // if param doesn't pass, maybe some other props, we don't want to call it
+      if (nextProps.param) {
+        this._getData(nextProps.param);
+      }
+    }
+
     render() {
       return (
         <div className="data-component">
@@ -313,7 +321,9 @@ const DataComponent = (ComposedComponent, url) =>
         </div>
       );
     }
-  };
+  }
+
+);
 
 export default DataComponent;
 ```
@@ -328,7 +338,7 @@ SelectedLanguage component:
 <li onClick={props.onSelect.bind(null, { lang, url: `https://api.github.com/search/repositories?q=stars:>1+language:${lang}&sort=stars&order=desc&type=Repositories` })} /> 
 ```
 
-### Solution 2
+## Solution 2
 
 Popular.js:
 
@@ -366,28 +376,25 @@ module.exports = Popular;
 
 Solution 2 uses DataComponent and passes Popular2. Any composedComponent has `data, childCanUpdateMe, param` from DataComponent. A small issue is that the language list will disappear(loading with repos), because it's wired up inside DataComponent.
 
-###  Solution 3
+##  Solution 3: refs
 
 Popular.js
 
 ```jsx
 ...
+// Solution 3: refs
+
 import DataComponent from './DataComponent';
 
 const RepoList = props => {
+  // console.log(props)
   return (
     <RepoGrid repos={props.data} />
   );
 };
 
 RepoList.propTypes = {
-  data: PropTypes.array.isRequired,
-  childCanUpdateMe: PropTypes.func,
-  param: PropTypes.object
-};
-
-RepoList.defaultProps = {
-  param: { lang: 'All' }
+  data: PropTypes.array.isRequired
 };
 
 const PopularView = DataComponent(
@@ -408,7 +415,6 @@ class Popular extends React.Component {
 
   updateLanguage(param) {
     this.setState({ selectedLanguage: param.lang });
-    
     // trigger PopularView fetch url and lang
     this.pv.childCanUpdateMe(param);
   }
@@ -419,7 +425,7 @@ class Popular extends React.Component {
         <SelectedLanguage
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage} />
-        <PopularView ref={pv => this.pv = pv} />
+        <PopularView ref={pv => this.pv = pv}/>
       </div>
     );
   }
@@ -429,3 +435,59 @@ module.exports = Popular;
 ```
 
 Solution 3 isolates Repo and language list. Popular component is parent of Repo(HOC) and languageList. It's easy to udpate the language, but the difficult part is how we can call `childCanUpdateMe` to make a new request when clicking any language inside `updateLanguage` function. Both Parent Popular component and child DataComponent have states, functions. Popular needs access to DataComponent functions. Usually, React data flow is from parent to child by passing props. So here, we uses `ref` to get child component: `<PopularView ref={pv => this.pv = pv} />`. Then we can call `childCanUpdateMe` inside `updateLanguage`. At last, clicking any language will execute this function, update selected language, make a new ajax request by passing new language and url.
+
+## Solution 4: componentWillReceiveProps
+
+Our goal is to let DataComponent make a new request and setState. What we have done is that we can update selectedLanguage. In solution 3, parent component Popular uses `refs` to get child DataComponent. We shouldn't use this method frequently since it offends one-way data flow from parent to children. Usually children can access parent's state, props by props. Children can know everything about parent, while parent doesn't know children, and React does this by lifting state to parent.
+
+In solution 4, it doesn't call childCanUpdateMe method to make new request and setState since parent doesn't know child's info. PopularView actually is DataComponent. When selectedLanguage updates, PopularView's param props changes, DataComponent's `componentWillReceiveProps(nextProps)` will be called, where we fetch and setState. To sum up, parent selectedLanguage state changes, and parent passes it as a props to child DataComponent. As long as this props changes, DataComponent's `componentWillReceiveProps` knows that, and it will fetch new data and setState.
+
+```jsx
+// Solution 4: componentWillReceiveProps
+import DataComponent from './DataComponent';
+
+const RepoList = props => <RepoGrid repos={props.data} />;
+
+RepoList.propTypes = {
+  data: PropTypes.array.isRequired
+};
+
+const PopularView = DataComponent(
+  RepoList,
+  window.encodeURI("https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories")
+);
+
+class Popular extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedLanguage: 'All'
+    };
+
+    this.updateLanguage = this.updateLanguage.bind(this);
+  }
+
+  updateLanguage(param) {
+    this.setState({ selectedLanguage: param.lang });
+    // solution 4 doesn't call below method to make new request and setState
+    // When selectedLanguage updates, PopularView's param props changes,
+    // DataComponent's componentWillReceiveProps(nextProps) will be called, where we fetch and setState
+    // this.pv.childCanUpdateMe(param);
+  }
+
+  render() {
+    return (
+      <div>
+        <SelectedLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage} />
+        <PopularView param={{ lang: this.state.selectedLanguage, url: `https://api.github.com/search/repositories?q=stars:>1+language:${this.state.selectedLanguage}&sort=stars&order=desc&type=Repositories` }} />
+      </div>
+    );
+  }
+}
+
+module.exports = Popular;
+```
+   
