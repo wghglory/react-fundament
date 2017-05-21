@@ -11,7 +11,7 @@
 * chapter08: Controlled Component vs Uncontrolled Component, Forms, Update parent's state in child component
 * chapter09: Dynamic Rendering + Query Params
 * chapter10: Javascript Array.reduce. Axios, Promises, Github API, props.children
-* chapter11: Reusable React Component via props, defaultProps
+* chapter11: Reusable React Component via props, defaultProps, **Higher Order Component**
 * chapter12: Eslint fix errors, Production + Hosting via firebase (_**Good for Presentation**_)
 
 ---

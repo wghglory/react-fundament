@@ -35,7 +35,8 @@ function SelectedLanguage(props) {
       {languages.map(lang =>
         (
           <li
-            onClick={props.onSelect.bind(null, lang)}
+            // onClick={props.onSelect.bind(null, lang)}  // Solution 1 only
+            onClick={props.onSelect.bind(null, { lang, url: `https://api.github.com/search/repositories?q=stars:>1+language:${lang}&sort=stars&order=desc&type=Repositories` })}  // Other solutions
             style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
             key={lang}>
             {lang}
@@ -49,6 +50,10 @@ function SelectedLanguage(props) {
 SelectedLanguage.propTypes = {
   selectedLanguage: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired
+};
+
+SelectedLanguage.defaultProps = {
+  selectedLanguage: 'All'
 };
 
 function RepoGrid(props) {
@@ -81,6 +86,8 @@ RepoGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 };
 
+/* Solution 1:
+
 class Popular extends React.Component {
   constructor(props) {
     super(props);
@@ -101,8 +108,13 @@ class Popular extends React.Component {
 
     api.fetchPopularRepos(lang)
       .then(function (repos) {
-        this.setState({repos:repos});
+        this.setState(function () {
+          return {
+            repos: repos
+          };
+        });
       }.bind(this));
+
   }
   render() {
     return (
@@ -113,6 +125,95 @@ class Popular extends React.Component {
         {!this.state.repos
           ? <Loading />
           : <RepoGrid repos={this.state.repos} />}
+      </div>
+    );
+  }
+}
+
+module.exports = Popular;*/
+
+
+/*// Solution 2:
+
+import DataComponent from './DataComponent';
+
+const Popular2 = props =>
+  (
+    <div>
+      <SelectedLanguage
+        selectedLanguage={props.param.lang}
+        onSelect={props.childCanUpdateMe} />
+      <RepoGrid repos={props.data} />
+    </div>
+  );
+
+Popular2.propTypes = {
+  data: PropTypes.array.isRequired,
+  childCanUpdateMe: PropTypes.func,
+  param: PropTypes.object
+};
+
+Popular2.defaultProps = {
+  param: { lang: 'All' }
+};
+
+const Popular = DataComponent(
+  Popular2,
+  window.encodeURI("https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories")
+);
+
+module.exports = Popular;*/
+
+
+// Solution 3
+
+import DataComponent from './DataComponent';
+
+const RepoList = props => {
+  return (
+    <RepoGrid repos={props.data} />
+  );
+};
+
+RepoList.propTypes = {
+  data: PropTypes.array.isRequired,
+  childCanUpdateMe: PropTypes.func,
+  param: PropTypes.object
+};
+
+RepoList.defaultProps = {
+  param: { lang: 'All' }
+};
+
+const PopularView = DataComponent(
+  RepoList,
+  window.encodeURI("https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories")
+);
+
+class Popular extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedLanguage: 'All'
+    };
+
+    this.updateLanguage = this.updateLanguage.bind(this);
+  }
+
+  updateLanguage(param) {
+    this.setState({ selectedLanguage: param.lang });
+    // trigger PopularView fetch url and lang
+    this.pv.childCanUpdateMe(param);
+  }
+
+  render() {
+    return (
+      <div>
+        <SelectedLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage} />
+        <PopularView ref={pv => this.pv = pv} />
       </div>
     );
   }

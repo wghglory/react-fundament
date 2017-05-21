@@ -23,16 +23,16 @@ class Loading extends React.Component {
         this.setState(function () {
           return {
             text: this.props.text  // prop, initial value. not state
-          }
-        })
+          };
+        });
       } else {
         this.setState(function (prevState) {
           return {
             text: prevState.text + '.'
-          }
+          };
         });
       }
-    }.bind(this), this.props.speed)
+    }.bind(this), this.props.speed);
   }
   componentWillUnmount() {
     // avoid memory leak
@@ -43,7 +43,7 @@ class Loading extends React.Component {
       <p style={styles.content}>
         {this.state.text}
       </p>
-    )
+    );
   }
 }
 
