@@ -42,6 +42,7 @@ redux/reducers folder: Reducer(state, action){ return newState }
 * When clicking the button, clickHandler dispatches actionType and payload to store. Store reducer executes and return new state. 
 * Larger application has many reducers, we use combineReducers to combine them and pass to createStore
 
+Redux has a function `combineReducers`, which combines all of the reducers into a single reducer. These reducers are used to build your state tree. The names of the fields match the names of the reducers that are passed in.
 
 index.reducer.js
 
