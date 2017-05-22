@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",
-    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix"
+    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "author": "Guanghui Wang",
   "license": "MIT",
