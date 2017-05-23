@@ -30,7 +30,7 @@ export default function Visualization() {
 
   return (
     <div>
-      <p className="alert alert-info">This part data comes from json file. Webpack json-loader solves.</p>
+      <p className="alert alert-info">Data comes from json.file. Webpack@2.5.1 doesn't need json-loader any more</p>
       <p>{Data.name} is at least {Data.age} years old. {smartMessage}</p>
 
       <p className="alert alert-success">This part data comes from csv file. Webpack dsv-loader, chart.js, just.randomcolor, canvas.</p>

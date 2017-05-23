@@ -12,7 +12,7 @@ npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-rea
 
 * "babel-core": "^6.24.1",
 * "babel-loader": "^7.0.0",
-* `babel-preset-env`: transform ES2015, new syntax to old code that older browser can understand
+* `babel-preset-env`: transform ES2015, ES2016, ES2017 new syntax to old code that older browser can understand
 * `babel-preset-react`: transform react jsx to react.createElement()
 * `babel-plugin-transform-object-rest-spread`: transform object using rest/spread operator
 
@@ -69,7 +69,7 @@ package.json
 
 ### css-loader
 
-any css file that contains import, url(..img) => require()
+any css file that contains import or url(..img) => require()
 
 ### Running Webpack
 

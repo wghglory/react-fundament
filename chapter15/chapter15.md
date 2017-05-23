@@ -1,21 +1,21 @@
-In this chapter, we want to create a new router called Visualization. Then load data.json and show chart.
+# Visualization -- load json, chart.js and d3
 
-# webpack json-loader and dsv-loader
+## webpack dsv-loader
 
-`npm install json-loader dsv-loader --save-dev`, then include below in webpack.config.js
+webpack needs dsv-loader to read csv file.
+
+`npm install dsv-loader --save-dev`, then include below in webpack.config.js
 
 ```javascript
-{
-  test: /\.json$/,
-  loader: 'json-loader'
-},
 {
   test:/\.csv$/,
   loader:'dsv-loader'
 }
 ```
 
-# Install chart.js and just.randomcolor
+> note: json-loader is not needed for webpack@2.5.1.
+
+## Install chart.js and just.randomcolor
 
 Visualization.js: we created alert.scss and import it to this component
 
@@ -25,8 +25,9 @@ import Data from '../data/data.json';
 import Chart from './Chart';
 import { array2chart } from '../utils/array2chart';
 import rawData from '../data/data.csv';
+import Timeline from './Timeline';
 
-import '../bootstrap/alert.scss';    
+import '../bootstrap/alert.scss';
 
 const chartData = {
   type: "bar", //radar, bar, horizontalBar, line
@@ -51,11 +52,14 @@ export default function Visualization() {
 
   return (
     <div>
-      <p className="alert alert-info">This part data comes from json file. Webpack json-loader solves.</p>
+      <p className="alert alert-info">Data comes from json.file. Webpack@2.5.1 doesn't need json-loader any more</p>
       <p>{Data.name} is at least {Data.age} years old. {smartMessage}</p>
 
       <p className="alert alert-success">This part data comes from csv file. Webpack dsv-loader, chart.js, just.randomcolor, canvas.</p>
       <Chart width="800" height="350" {...chartData} style={{ margin: '0 auto' }} />
+
+      <p className="alert alert-info" style={{ marginTop: '20px'}}>D3</p>
+      <Timeline name="History of Skiing" />
     </div>
   );
 }
@@ -63,7 +67,7 @@ export default function Visualization() {
 
 Chart.js: 
 
-> note `ref` is jquery-like way to get element. Using `ref` is uncontrolled component. Don't use unless necessary.
+> note `ref` is jquery-like way to get element. Using `ref` is uncontrolled component. Don't use it frequently unless necessary.
 
 ```jsx
 import React from 'react';
@@ -126,7 +130,7 @@ Chart.defaultProps = {
 };
 ```
 
-# D3.js -- [Data-Driven Documents](https://d3js.org)
+## D3.js -- [Data-Driven Documents](https://d3js.org)
 
 ```jsx
 // Timeline.js

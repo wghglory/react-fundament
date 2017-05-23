@@ -35,10 +35,10 @@ const config = {
           use: ['css-loader', 'sass-loader']
         })
       },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }, 
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json-loader'
+      // }, 
       {
         test: /\.csv$/,
         loader: 'dsv-loader'

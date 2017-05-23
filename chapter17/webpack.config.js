@@ -36,10 +36,6 @@ const config = {
         })
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
         test: /\.csv$/,
         loader: 'dsv-loader'
       }

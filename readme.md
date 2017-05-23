@@ -18,7 +18,7 @@
 
 * chapter13: SASS: CSS separation from js, webpack scss-loader, webpack build css and scss together
 * chapter14: **Use bootstrap 4 and remove duplicate css**. Native and react-transition-group Animation. Use ES6 import instead of CommonJs require. **Webpack config separate dev and prod**
-* chapter15: React Data Visualization (Chart.js, just.randomcolor, D3.js), load data from json, csv. Use **fetch** instead of axios
+* chapter15: React Data Visualization (Chart.js, just.randomcolor, D3.js), load json data, csv. Use **fetch** instead of axios
 * chapter16: Create todo tasks by **Flux**(action, dispatcher, store)
 * chapter17: Add nodejs server, but still client-side rendering. Use `connect-history-api-fallback` to fix client-side routing
 * chapter18: server rendering with ejs template
