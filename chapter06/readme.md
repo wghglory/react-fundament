@@ -125,4 +125,4 @@ class FriendsList extends React.Component {
 
 The second is a more advanced case and is `shouldComponentUpdate`. React is very intelligent about not re-rendering unless something changed. You can make it even more intelligent by implementing shouldComponentUpdate. **shouldComponentUpdate returns a boolean, if that boolean is true, that component will re-render**. If it's false, that component (and naturally all child components), won't re-render. **This can be a huge performance gain if you know exactly when you want to re-render** (based on either the state or the props of your components). 
 
-<img src="http://om1o84p1p.bkt.clouddn.com//1494277419.png" alt="react life cycle events"/>
+<img src="http://om1o84p1p.bkt.clouddn.com/1494277419.png" alt="react life cycle events"/>
