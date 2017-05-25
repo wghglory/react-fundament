@@ -18,6 +18,8 @@ flux one way data flow just as react:
 
 view(jsx) --> actions --> dispatcher(singleton, make sure action is handler one by one) --> stores(read only) --> back to view
 
+In Flux, application state data is managed outside of React components in stores. Stores hold and change the data, and are the only thing that can update a view in Flux. If a user were to interact with a web page. Say, click a button or submit a form—then an action would be created to represent the user’s request. An action provides the instructions and data required to make a change. Actions are dispatched using a central control component called the dispatcher. The dispatcher is designed to queue up our actions and dispatch them to the appropriate store. Once a store receives an action, it will use it as instructions to modify state and update the view. Data flows in one direction: action to a dispatcher to the store and finally to the view.
+
 ### Flow in detail:
 
 1. component element click event --> eventHandler calls action 
