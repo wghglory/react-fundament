@@ -10,6 +10,8 @@ Cons:
 
 Sometimes your view may show several kinds of models, so it's hard to manage the relationship bewteen view and model mappings. i.e, At first, you have a product view showing only product list. When project gets larger, this view may need include user model, comment model, etc. And other views may have the same issue. These dependencies are difficult to manage, and maybe there're cyclic dependencies. In Asp.net MVC, the solution is create a viewModel. But you have to write extra code about viewModel.
 
+2nd, losing control of your data flow. In general the data flow is bi-directional. The user input in one component can affect other components and vice versa. By using Redux we’re solving this problem by introducing a central data store in our application. The store contains the state of the application and is the source of truth for components. By using the store concept you do not need to synchronize state between components manually. Instead you can fully rely on the Redux store at any time.
+
 # Flux architecture
 
 Due to the MVC shortcomings, Facebook has a view including message list, a small message window, message indicator on right conner. They use flux to manage the message state.

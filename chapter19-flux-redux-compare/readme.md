@@ -199,7 +199,7 @@ export default store;
 
 Our entire state tree is stored in a single object. A potential complaint might be that it’s not modular enough, possibly because you’re considering modularity as describing objects. Redux achieves modularity via functions. Functions are used to update parts of the state tree. These functions are called reducers.
 
-**Reducers are functions that take the current state along with an action as arguments and use them to create and return a new state**. Reducers are designed to update specific parts of the state tree, either leaves or branches. We can then compose reducers into one reducer that can handle updating the entire state of our app given any action.
+**Reducers are functions that take the current state along with an action as arguments and return a new state. The important thing to notice here is that the state is not changed directly. Instead a new state object (based on the old state) is created and the update is done to the new state.**. Reducers are designed to update specific parts of the state tree, either leaves or branches. We can then compose reducers into one reducer that can handle updating the entire state of our app given any action.
 
 #### REDUCER COMPOSITION IS NOT REQUIRED, JUST RECOMMENDED
 
