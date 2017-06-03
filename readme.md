@@ -6,7 +6,7 @@
 * [chapter04](https://github.com/wghglory/react-fundamental/tree/master/chapter04): "this" keyword recap, managing/updating state
 * [chapter05](https://github.com/wghglory/react-fundamental/tree/master/chapter05): Stateless Functional Components, Separate presentational components and container components
 * [chapter06](https://github.com/wghglory/react-fundamental/tree/master/chapter06): Life Cycle Events + Ajax by axios
-* [chapter07](https://github.com/wghglory/react-fundamental/tree/master/chapter07): Adding React Router to our Application by react-router-dom
+* [chapter07](https://github.com/wghglory/react-fundamental/tree/master/chapter07-router): Adding React Router to our Application by react-router-dom
 * [] todo: https://reacttraining.com/react-router/web/example/url-params
 * [chapter08](https://github.com/wghglory/react-fundamental/tree/master/chapter08): Controlled Component vs Uncontrolled Component, Forms, Update parent's state in child component
 * [chapter09](https://github.com/wghglory/react-fundamental/tree/master/chapter09): Dynamic Rendering + Query Params
@@ -22,5 +22,5 @@
 * [chapter16](https://github.com/wghglory/react-fundamental/tree/master/chapter16): Create todo tasks by **Flux**(action, dispatcher, store)
 * [chapter17](https://github.com/wghglory/react-fundamental/tree/master/chapter17): Add nodejs server, but still client-side rendering. Use `connect-history-api-fallback` to fix client-side routing
 * [chapter18](https://github.com/wghglory/react-fundamental/tree/master/chapter18): server rendering with ejs template
-* [chapter19](https://github.com/wghglory/react-fundamental/tree/master/chapter19): A counter demo -- **redux, flux** comparison
-* [chapter20](https://github.com/wghglory/react-fundamental/tree/master/chapter20): Redux mapStateToProps, mapDispatchToProps, combineReducers
+* [chapter19](https://github.com/wghglory/react-fundamental/tree/master/chapter19-flux-redux-compare): A counter demo -- **redux, flux** comparison
+* [chapter20](https://github.com/wghglory/react-fundamental/tree/master/chapter20-redux-ecommerce): Redux mapStateToProps, mapDispatchToProps, combineReducers
