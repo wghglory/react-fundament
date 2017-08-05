@@ -12,7 +12,7 @@ const history = require('connect-history-api-fallback');
 // Define the Express configuration method
 module.exports = function (db) {
   // Create a new Express application instance
-  var app = express();
+  var app = express(db);
 
   app.use(bodyParser.urlencoded({
     extended: true

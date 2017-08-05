@@ -1,19 +1,19 @@
-# Add nodejs server, but still client-side rendering 
+# Add nodejs server, but still client-side rendering
 
 In this chapter, we will add a node server environment and mongodb to make **SPA**. The server uses "dist/index.html" as static resource. I'm not going to use ejs template.
 
 Steps to setup node server environment:
 
-* Add server foler, config folder and server.js, so we have node server, express, mongoose, model, api router, controller.
+* Add server folder, config folder and server.js, so we have node server, express, mongoose, model, api router, controller.
 * server.js configures any file in dist folder as a static resource. So after running webpack, dist/index.html, css, js will be working well.
 
 ## Client-side Routing is not working
 
 After add nodejs server, if you request `localhost/task` directly, you will see "Cannot GET /task". Now only way to see that page is to request root, then click "todo" react-router link, the url will be `localhost/task`. So to sum up, directly targeting `localhost/task` or refreshing page will give us "Cannot GET /task". The reason is our server doesn't have this resource by physical path. To solve this issue, let's recap why webpack-dev-server and firebase work well.
 
-### Recap:
+### Recap
 
-We have used webpack-dev-server and firebase before. Both provides a server environment and they have a feature which can make page manually refreashing working well.
+We have used webpack-dev-server and firebase before. Both provides a server environment and they have a feature which can make page manually refreshing working well.
 
 Webpack does this by **publicPath** and **historyApiFallback**:
 

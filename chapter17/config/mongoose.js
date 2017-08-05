@@ -2,19 +2,19 @@
 
 // Load the module dependencies
 const config = require('./config'),
-  mongoose = require('mongoose');
+    mongoose = require('mongoose');
 
 // Define the Mongoose configuration method
-module.exports = function () {
-  // http://mongoosejs.com/docs/promises.html: Use native promises
-  mongoose.Promise = global.Promise;
+module.exports = function() {
+    // http://mongoosejs.com/docs/promises.html: Use native promises
+    mongoose.Promise = global.Promise;
 
-  // Use Mongoose to connect to MongoDB
-  const db = mongoose.connect(config.db);
+    // Use Mongoose to connect to MongoDB
+    const db = mongoose.connect(config.db, {useMongoClient:true});
+    
+    // Load the application models 
+    require('../server/models/task.server.model');
 
-  // Load the application models 
-  require('../server/models/task.server.model');
-
-  // Return the Mongoose connection instance
-  return db; 
+    // Return the Mongoose connection instance
+    return db;
 };

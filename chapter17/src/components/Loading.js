@@ -1,5 +1,5 @@
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const styles = {
   content: {
@@ -18,12 +18,21 @@ class Loading extends React.Component {
   }
   componentDidMount() {
     const stopper = this.props.text + '...';
-    this.interval = window.setInterval(function () {
+
+    this.interval = setInterval(() => {
       if (this.state.text === stopper) {
-        this.setState(function () {
-          return {
-            text: this.props.text  // prop, initial value. not state
-          };
+        this.setState({text: this.props.text});
+      } else {
+        this.setState(prevState => ({
+          text: prevState.text + '.'
+        }));
+      }
+    }, this.props.speed);
+
+    /* this.interval = setInterval(function () {
+      if (this.state.text === stopper) {
+        this.setState({
+          text: this.props.text // prop, initial value. not state
         });
       } else {
         this.setState(function (prevState) {
@@ -32,11 +41,11 @@ class Loading extends React.Component {
           };
         });
       }
-    }.bind(this), this.props.speed);
+    }.bind(this), this.props.speed); */
   }
   componentWillUnmount() {
     // avoid memory leak
-    window.clearInterval(this.interval);
+    clearInterval(this.interval);
   }
   render() {
     return (
@@ -49,7 +58,7 @@ class Loading extends React.Component {
 
 Loading.propTypes = {
   text: PropTypes.string.isRequired,
-  speed: PropTypes.number.isRequired,
+  speed: PropTypes.number.isRequired
 };
 
 Loading.defaultProps = {
@@ -57,4 +66,4 @@ Loading.defaultProps = {
   speed: 300
 };
 
-module.exports = Loading;
+export default Loading;

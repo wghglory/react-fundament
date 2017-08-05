@@ -1,5 +1,5 @@
-const React = require('react');
-const NavLink = require('react-router-dom').NavLink;
+import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 function Nav() {
   return (
@@ -8,9 +8,9 @@ function Nav() {
       <li><NavLink activeClassName="active" to="/battle">Battle</NavLink></li>
       <li><NavLink activeClassName="active" to="/popular">Popular</NavLink></li>
       <li><NavLink activeClassName="active" to="/visualization">Visualization</NavLink></li>
-      <li><NavLink activeClassName="active" to="/task">Todo</NavLink></li>
+      <li><NavLink activeClassName="active" to="/task">Task</NavLink></li>
     </ul>
   );
 }
 
-module.exports = Nav;
+export default Nav;
