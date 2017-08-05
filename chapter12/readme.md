@@ -1,9 +1,11 @@
-项目hosting地址：https://github-battle-react-cf433.firebaseapp.com
+# Hosting
 
-# Eslint fix errors
+项目hosting地址：<https://github-battle-react-cf433.firebaseapp.com>
+
+## Eslint fix errors
 
 ```bash
-node_modules/.bin/eslint "app/**/*.js" --fix
+node_modules/.bin/eslint "src/**/*.js" --fix
 ```
 
 It's better to add this into package.json
@@ -11,11 +13,11 @@ It's better to add this into package.json
 ```json
   "scripts": {
     "start": "webpack-dev-server --open",
-    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix"
+    "fix": "node_modules/.bin/eslint 'src/**/*.js' --fix"
   },
 ```
 
-# Webpack.config.js
+## Webpack.config.js
 
 ```diff
 var path = require('path');
@@ -61,13 +63,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html inj
 + module.exports = config;
 ```
 
-# package.json
+## package.json
 
 ```diff
 {
   "scripts": {
     "start": "webpack-dev-server --open",
-    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix",
+    "fix": "node_modules/.bin/eslint .js src --fix",
+    "lint": "./node_modules/.bin/eslint .js src",
 +    "build": "NODE_ENV='production' webpack -p",
 +    "firebase-init": "firebase login && firebase init",
 +    "deploy": "npm run build && firebase deploy"
@@ -103,13 +106,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html inj
 }
 ```
 
-# Hosting thru firebase
+## Hosting thru firebase
 
 1. Create a app "github-battle-react" in firebase.com (my account is google account wghglory89@gmail.com)
 
 1. `npm run firebase-init`
 
-1. ? Which Firebase CLI features do you want to setup for this folder? Press Space to select features, then Enter to confirm your choices. (Press <space> to select)
+1. ? Which Firebase CLI features do you want to setup for this folder? Press Space to select features, then Enter to confirm your choices. (Press space to select)
 
     - ◯ Database: Deploy Firebase Realtime Database Rules
     - ◯ Functions: Configure and deploy Cloud Functions
@@ -149,7 +152,6 @@ i  starting release process (may take several minutes)...
 
 ✔  Deploy complete!
 
-Project Console: 
-https://console.firebase.google.com/project/github-battle-react-cf433/overview
+Project Console: <https://console.firebase.google.com/project/github-battle-react-cf433/overview>
 
-Hosting URL: https://github-battle-react-cf433.firebaseapp.com
+Hosting URL: <https://github-battle-react-cf433.firebaseapp.com>

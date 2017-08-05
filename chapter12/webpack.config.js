@@ -3,7 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html inj
 var webpack = require('webpack');
 
 var config = {
-  entry: './app/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
@@ -20,7 +20,7 @@ var config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'app/index.html'
+      template: 'src/index.html'
     })
   ]
 };

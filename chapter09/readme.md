@@ -1,6 +1,8 @@
+# Continue on Battle component
+
 We are going to build Avatar and Reset button in Battle component. In Battle page, typing username and clicking submit should render PlayerPreview. Then click "battle" and navigate to /battle/result?..., and show Result component. Reset button will clear and show the input textbox.
 
-# Dynamic Rendering + Query Params by "props.match"
+## Dynamic Rendering + Query Params by "props.match"
 
 Battle.js:
 
@@ -199,4 +201,3 @@ module.exports = Battle;
   Battle
 </Link>
 ```
-         

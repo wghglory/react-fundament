@@ -1,13 +1,13 @@
-What We're going to in this article.
+# Add a PlayPreview component
 
 1. add methods in api.js
-2. extract reusable PlayerPreview component
-3. update Battle.js and use PlayerPreview
-4. click battle, render result component
+1. extract reusable PlayerPreview component
+1. update Battle.js and use PlayerPreview
+1. click battle, render result component
 
-# javascript array.reduce
+## javascript array.reduce
 
-We ofen need to take a list of things and convert that into just one item - whether an integer, an object, or another array.
+We often need to take a list of things and convert that into just one item - whether an integer, an object, or another array.
 
 ```javascript
 var scores = [89, 76, 47, 95]
@@ -19,7 +19,7 @@ var total = scores.reduce(reducer, initialValue)
 var average = total / scores.length
 ```
 
-You'll notice .reduce takes in two values, a callback function and an initial value. The callback (reducer) function has two parameters. 
+You'll notice .reduce takes in two values, a callback function and an initial value. The callback (reducer) function has two parameters.
 
 The very first time the reducer function is called, it's going to be passed the initialValue you gave it (the 2nd argument to .reduce) and the first item in the actual array. So in our example above the first time that our reducer function runs, accumulator is going to be 0 and item is going to be 89. Remember, the goal is to transform an array into a single value. We currently have two numbers, 0 and 89, and are goal is to get that to one value. Because we're wanting to find the sum of every item in the array, we'll add 89 + 0 to get 89. That brings up a very important step. The thing that gets returned from the reducer function will then be passed as the accumulator the next time the function runs. So when reducer runs again, accumulator will be 89 and item will now be the second item in the array, 76. This pattern continues until we have no more items in the array and we get the summation of all of our reducer functions, which is 307.
 
@@ -60,7 +60,7 @@ function getStarCount(repos) {
 }
 ```
 
-# Composition vs props.children
+## Composition vs props.children
 
 ```jsx
 <Clock>
@@ -68,7 +68,7 @@ function getStarCount(repos) {
 </Clock>
 ```
 
-Now with the implementation of our Clock component, we'll need somehow to access 12:49 AM or whatever is between the opening and closing element in order to update it. React gives us an easy way to do this and that is via `this.props.children`. In this case this.props.children will evaluate to 12:49 AM.
+Now with the implementation of our Clock component, we'll need somehow to access 12:49 AM or whatever is between the opening and closing element in order to update it. React gives us an easy way to do this and that is via `this.props.children`. In this case `this.props.children` will evaluate to 12:49 AM.
 
 That's great, but what if our component is a little more complex?
 

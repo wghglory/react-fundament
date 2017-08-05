@@ -10,7 +10,7 @@ const DataComponent = (ComposedComponent, url) => (
       };
 
       this._getData = this._getData.bind(this);
-      this.childCanUpdateMe = this.childCanUpdateMe.bind(this);
+      this.fetchByParam = this.fetchByParam.bind(this);
     }
 
     _getData(param = {}) {
@@ -28,7 +28,7 @@ const DataComponent = (ComposedComponent, url) => (
         }));
     }
 
-    childCanUpdateMe(param) {
+    fetchByParam(param) {
       this._getData(param);
     }
 
@@ -49,7 +49,7 @@ const DataComponent = (ComposedComponent, url) => (
         <div className="data-component">
           {(this.state.loading) ?
             <p style={{ textAlign: 'center', fontSize: '20px' }}>Loading...</p> :
-            <ComposedComponent {...this.state} {...this.props} childCanUpdateMe={this.childCanUpdateMe} />
+            <ComposedComponent {...this.state} {...this.props} fetchByParam={this.fetchByParam} />
           }
         </div>
       );

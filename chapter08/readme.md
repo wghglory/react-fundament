@@ -1,13 +1,13 @@
-We will start to work on Battle Component
+# Battle Component
 
-# Controlled Component vs Uncontrolled Component
+## Controlled Component vs Uncontrolled Component
 
 React recommends to use controlled component.
 
 * Controlled Component: Any form input binds to state, and when state changes, UI input will be updated
 * Uncontrolled Component: Get the input value from DOM directly
 
-# Update parent's state in child component
+## Update parent's state in child component
 
 Battle.js: Battle components contains 2 PlayerInput components. When clicking submit button in child components, we want to update the state of parent component. To do this, we pass down stateUpdateMethod in parent component via props `<PlayerInput onSubmit={this.handleSubmit} />` and then invoke it when needed.
 
@@ -128,7 +128,7 @@ PlayerInput.defaultProps = {
 module.exports = Battle;
 ```
 
-Now after typing username, clicking submit, the PlayerInput component should disappear since playerOneName or playerTwoName is not null. 
+Now after typing username, clicking submit, the PlayerInput component should disappear since playerOneName or playerTwoName is not null.
 
 ```jsx
 {!playerOneName &&

@@ -142,14 +142,14 @@ const Popular2 = props =>
     <div>
       <SelectedLanguage
         selectedLanguage={props.param.lang}
-        onSelect={props.childCanUpdateMe} />
+        onSelect={props.fetchByParam} />
       <RepoGrid repos={props.data} />
     </div>
   );
 
 Popular2.propTypes = {
   data: PropTypes.array.isRequired,
-  childCanUpdateMe: PropTypes.func,
+  fetchByParam: PropTypes.func,
   param: PropTypes.object
 };
 
@@ -199,7 +199,7 @@ class Popular extends React.Component {
   updateLanguage(param) {
     this.setState({ selectedLanguage: param.lang });
     // trigger PopularView fetch url and lang
-    this.pv.childCanUpdateMe(param);
+    this.pv.fetchByParam(param);
   }
 
   render() {
@@ -247,7 +247,7 @@ class Popular extends React.Component {
     // solution 4 doesn't call below method to make new request and setState
     // When selectedLanguage updates, PopularView's param props changes,
     // DataComponent's componentWillReceiveProps(nextProps) will be called, where we fetch and setState
-    // this.pv.childCanUpdateMe(param);
+    // this.pv.fetchByParam(param);
   }
 
   render() {
