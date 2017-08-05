@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const api = require('../utils/api')
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {fetchPopularRepos} from '../utils/api';
 
 // Below is a private component: for now only Popular uses this rendered view, so I don't create a file for it
 /*class SelectedLanguage extends React.Component{
@@ -41,7 +41,7 @@ function SelectedLanguage(props) {
         )
       )}
     </ul>
-  )
+  );
 }
 
 SelectedLanguage.propTypes = {
@@ -69,15 +69,15 @@ function RepoGrid(props) {
               <li>{repo.stargazers_count} stars</li>
             </ul>
           </li>
-        )
+        );
       })}
     </ul>
-  )
+  );
 }
 
 RepoGrid.propTypes = {
   repos: PropTypes.array.isRequired,
-}
+};
 
 class Popular extends React.Component {
   constructor(props) {
@@ -91,18 +91,18 @@ class Popular extends React.Component {
   }
 
   componentDidMount() {
-    this.updateLanguage(this.state.selectedLanguage)
+    this.updateLanguage(this.state.selectedLanguage);
   }
 
   updateLanguage(lang) {
     this.setState({ selectedLanguage: lang, repos: null });
 
-    api.fetchPopularRepos(lang)
+    fetchPopularRepos(lang)
       .then(function (repos) {
         this.setState(function () {
           return {
             repos: repos
-          }
+          };
         });
       }.bind(this));
 
@@ -117,8 +117,8 @@ class Popular extends React.Component {
           ? <p>LOADING!</p>
           : <RepoGrid repos={this.state.repos} />}
       </div>
-    )
+    );
   }
 }
 
-module.exports = Popular;
+export default Popular;

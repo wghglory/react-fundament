@@ -1,11 +1,10 @@
-let React = require('react')
-let ReactDOM = require('react-dom')
-require('./index.css')
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
-class Users extends React.Component {
+class Users extends Component {
   render() {
-    let friends = this.props.list.filter(ele => ele.friend === true);
-    let nonFriends = this.props.list.filter(ele => ele.friend !== true);
+    const friends = this.props.list.filter(ele => ele.friend === true);
+    const nonFriends = this.props.list.filter(ele => ele.friend !== true);
 
     return (
       <div>

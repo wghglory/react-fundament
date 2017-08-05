@@ -1,6 +1,6 @@
 # Pure Functions. f(d)=view. Props and Nesting React Components.
 
-One of the best parts of React.js is that your function is going to **take in some arguments and return some UI**. 
+One of the best parts of React.js is that your function is going to **take in some arguments and return some UI**.
 
 Let's look at some actual code now.
 

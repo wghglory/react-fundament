@@ -1,5 +1,5 @@
-const React = require('react');
-const PropTypes = require('prop-types');
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Below is a private component: for now only Popular uses this rendered view, so I don't create a file for it
 /*class SelectedLanguage extends React.Component{
@@ -40,7 +40,7 @@ function SelectedLanguage(props){
           )
         )}
       </ul>
-  )
+  );
 }
 
 SelectedLanguage.propTypes = {
@@ -71,8 +71,8 @@ class Popular extends React.Component {
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage}/>
       </div>
-    )
+    );
   }
 }
 
-module.exports = Popular;
+export default Popular;

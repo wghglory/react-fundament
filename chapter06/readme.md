@@ -9,7 +9,7 @@ There are many different life cycle methods, but in this post we're going to exp
 You can really break React's Life Cycle Methods down into two categories.
 
 1. **When a component gets mounted to the DOM and unmounted.**
-2. **When a component receives new data.**
+1. **When a component receives new data.**
 
 ## Mounting / Unmounting
 
@@ -119,10 +119,10 @@ class FriendsList extends React.Component {
 }
 ```
 
-## Other Life Cycle Events that are going to be called whenever the component receives new data from its parent component.
+## Other Life Cycle Events that are going to be called whenever the component receives new data from its parent component
 
 `componentWillReceiveProps`: There will be times that you'll want to execute some code whenever your component receives new props. That's exactly what componentWillReceiveProps does.
 
-The second is a more advanced case and is `shouldComponentUpdate`. React is very intelligent about not re-rendering unless something changed. You can make it even more intelligent by implementing shouldComponentUpdate. **shouldComponentUpdate returns a boolean, if that boolean is true, that component will re-render**. If it's false, that component (and naturally all child components), won't re-render. **This can be a huge performance gain if you know exactly when you want to re-render** (based on either the state or the props of your components). 
+The second is a more advanced case and is `shouldComponentUpdate`. React is very intelligent about not re-rendering unless something changed. You can make it even more intelligent by implementing shouldComponentUpdate. **shouldComponentUpdate returns a boolean, if that boolean is true, that component will re-render**. If it's false, that component (and naturally all child components), won't re-render. **This can be a huge performance gain if you know exactly when you want to re-render** (based on either the state or the props of your components).
 
-<img src="http://om1o84p1p.bkt.clouddn.com/1494277419.png" alt="react life cycle events"/>
+![life cycle](http://om1o84p1p.bkt.clouddn.com/1494277419.png)

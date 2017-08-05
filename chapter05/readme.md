@@ -26,7 +26,7 @@ ReactDOM.render(<HelloWorld name='Tyler' />, document.getElementById('app'))
 
 Notice React **passes props to your function as the first argument** to the function so there is **no "this" keyword**. This is a lot **cleaner and makes creating React components more natural** since you're literally just making a function. **It's a good idea to try to use as many Stateless Functional Components as possible because then you have a good separation of presentational components vs other components.**
 
-# Separate presentational components and container components
+## Separate presentational components and container components
 
 * write presentational components as stateless function components
 * write container components as class with state, pass state as prop into presentational components
@@ -41,7 +41,7 @@ const PropTypes = require('prop-types');
 /*class SelectedLanguage extends React.Component{
   render(){
     const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
-    
+
     // note: "this" inside es6 arrow function is same with outer scope, so no need to pass this context to map
     return (
       <ul className="languages">
@@ -62,7 +62,7 @@ const PropTypes = require('prop-types');
 
 function SelectedLanguage(props){
   const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
-  
+
   return (
     <ul className="languages">
         {languages.map(lang=>
@@ -97,7 +97,7 @@ class Popular extends React.Component {
   updateLanguage(lang) {
     this.setState({ selectedLanguage: lang });
     // this.setState(function () {
-    //   return {selectedLanguage: lang} 
+    //   return {selectedLanguage: lang}
     // });
   }
   render() {

@@ -1,6 +1,6 @@
-let React = require('react');
-let ReactDOM = require('react-dom')
-let PropTypes = require('prop-types')
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 /*class Users extends React.Component {
   render() {
@@ -24,7 +24,7 @@ ReactDOM.render(
 );*/
 
 
-class Users extends React.Component {
+class Users extends Component {
   render() {
     let friends = this.props.list.filter(ele => ele.friend === true);
     let nonFriends = this.props.list.filter(ele => ele.friend !== true);
@@ -43,7 +43,7 @@ class Users extends React.Component {
           {nonFriends.map(user => <li key={user.id}>{user.name}</li>)}
         </ul>
       </div>
-    )
+    );
   }
 }
 
@@ -55,7 +55,7 @@ Users.propTypes = {
     name: PropTypes.string.isRequired,
     friend: PropTypes.bool.isRequired,
   }))
-}
+};
 
 ReactDOM.render(
   <Users list={[

@@ -6,7 +6,7 @@ npm install --save react react-dom
 npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react css-loader style-loader html-webpack-plugin webpack webpack-dev-server
 ```
 
-# Webpack
+## Webpack
 
 ### babel loader
 
@@ -41,8 +41,8 @@ We have our babel config in package.json. It's better to extract it and put into
     "react"
   ],
   "plugins":[
-		"transform-object-rest-spread"
-	]
+    "transform-object-rest-spread"
+  ]
 }
 ```
 
@@ -50,11 +50,11 @@ package.json
 
 > babel-plugin-transform-object-rest-spread:
 >
-> spread i.e.: let { _id, label, ...rest } = task  // task is a object with property _id, label, etc
+> spread example: `let { id, label, ...rest } = task`  // task is a object with property id, label, etc
 >
-> spread i.e.: const { className, children, ...rest } = this.props
+> spread example: `const { className, children, ...rest } = this.props`
 >
-> rest i.e.: `function(...[a, b, c]) { return a + b + c; }`
+> rest example: `function(...[a, b, c]) { return a + b + c; }`
 
 ```json
 "devDependencies": {
@@ -69,8 +69,8 @@ package.json
 
 ### css-loader
 
-any css file that contains import or url(..img) => require()
+any css file that contains import or `url(..img)` => `require()`
 
 ### Running Webpack
 
-`npm start` will run `webpack-dev-server --open`, which will start running babel and react transform, cache result. So now "dist" folder is not showing. In production we will generate the dist folder. 
+`npm start` will run `webpack-dev-server --open`, which will start running babel and react transform, cache result. So now "dist" folder is not showing. In production we will generate the "dist" folder.

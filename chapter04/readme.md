@@ -5,7 +5,7 @@
 * new binding
 * window binding
 
-**where is this  function invoked?**
+**where is this function invoked?**
 
 ## Implicit Binding: left of the dot at call time
 
@@ -26,7 +26,7 @@ example 2:
 ```javascript
 var sayNameMixin = function(obj){
   obj.sayName = function(){
-    console.log(this.name);  
+    console.log(this.name);
   }
 };
 
@@ -131,10 +131,10 @@ sayAge();  // this will be window, so age is undefined
 sayAge.call(me);  // explicit call: 22
 ```
 
-# Managing and Updating State
+## Managing and Updating State
 
 ```jsx
-// componenents/Popular.js
+// components/Popular.js
 const React = require('react');
 
 class Popular extends React.Component {
@@ -151,7 +151,7 @@ class Popular extends React.Component {
   updateLanguage(lang) {
     this.setState({ selectedLanguage: lang });
     // this.setState(function () {
-    //   return {selectedLanguage: lang} 
+    //   return {selectedLanguage: lang}
     // });
   }
   render() {

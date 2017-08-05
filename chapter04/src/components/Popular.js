@@ -1,4 +1,4 @@
-const React = require('react');
+import React, {Component} from 'react';
 
 class Popular extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Popular extends React.Component {
     //   return {selectedLanguage: lang} 
     // });
   }
+  
   render() {
     const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
 
@@ -66,4 +67,4 @@ class Popular extends React.Component {
   }
 }
 
-module.exports = Popular;
+export default Popular;

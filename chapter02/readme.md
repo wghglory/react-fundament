@@ -15,7 +15,7 @@ ReactDOM.render(<HelloUser name="Guanghui"/>, document.getElementById('app'));
 
 Notice when we use the component, we're passing in a name attribute. This attribute can then be accessed inside the component as `this.props.name`.
 
-# 3 Prop example
+## 3 Prop example
 
 ```jsx
 class Badge extends React.Component {
@@ -31,7 +31,7 @@ class Badge extends React.Component {
 }
 
 ReactDOM.render(
-  <Badge 
+  <Badge
     name='Tyler McGinnis'
     username='tylermcginnis'
     img='https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'/>,
@@ -111,7 +111,7 @@ ReactDOM.render(
 );
 ```
 
-# Creating lists in React with map and filter
+## Creating lists in React with map and filter
 
 map is a property on every Array in JavaScript and allows you to "map" over an array, and returns you a new array with some other updates, like adding 10. Original array is not changed.
 
@@ -139,9 +139,9 @@ class ShowList extends React.Component {
       <div>
         <h3> Friends </h3>
         <ul>
-          {this.props.names.map(function(friend){
-            return <li> {friend} </li>;
-          })}
+          {this.props.names.map(friend =>
+            (<li> {friend} </li>);
+          )}
         </ul>
       </div>
     )
@@ -149,7 +149,7 @@ class ShowList extends React.Component {
 }
 ```
 
-filter does almost same thing as map, but filter allows you to **filter out certain items** in an array. For example, let's say we only wanted to have friends whose name started with 'E'. 
+filter does almost same thing as map, but filter allows you to **filter out certain items** in an array. For example, let's say we only wanted to have friends whose name started with 'E'.
 
 ```javascript
 var friends = ['Ean', 'Tyler', 'Mikenzi', 'Eric', 'Jessica'];
@@ -184,9 +184,9 @@ ReactDOM.render(
 ```
 
 ```jsx
-let React = require('react')
-let ReactDOM = require('react-dom')
-require('./index.css')
+import React, {Component} from 'react';
+import ReactDom from 'react-dom';
+import './index.css'
 
 class Users extends React.Component {
   render() {
