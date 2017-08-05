@@ -2,64 +2,9 @@
 
 This article will compare flux and redux by a Counter demo.
 
-## React State
-
-index.js
-
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-
-ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-);
-```let initialState = 0;
-
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'increment':
-      return state + 1;
-    default:
-      return state;
-  }
-}
-
-components/App.js
-
-```jsx
-import React from 'react';
-
-// react state
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { count: 0 };
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
-  clickHandler() {
-    this.setState(prevState => ({
-      count: prevState.count + 1
-    }));
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.state.count}</p>
-        <button onClick={this.clickHandler}>click</button>
-      </div>
-    );
-  }
-}
-```
-
 ## Flux
 
-**When there is any click event, clickHanlder will call a specific action. This action calls dispatcher to dispatch the actionType and payload. Dispatcher registers the store's operator/reducer, so store knows how to manage data according to actionType and payload. After data changes, store emit an event. Since App passes callback function to store's addListener and removeListener, store will execute callback, which will setState and getData from store.**
+**When there is any click event, clickHandler will call a specific action. This action calls dispatcher to dispatch the actionType and payload. Dispatcher registers the store's operator/reducer, so store knows how to manage data according to actionType and payload. After data changes, store emit an event. Since App passes callback function to store's addListener and removeListener, store will execute callback, which will setState and getData from store.**
 
 Data flow: view clickEvent --> action --> dispatcher --> store --> cb to update view
 
@@ -155,7 +100,7 @@ class CounterStore extends EventEmitter {
     this.operate = this.operate.bind(this);
   }
 
-  addChangeListener(cb) {    
+  addChangeListener(cb) {
     this.on('change', cb);
   }
 
@@ -193,7 +138,7 @@ export default store;
 
 ## Redux
 
-**When there is any click event, clickHanlder will call a specific action. This action calls store.dispatch with actionType and payload. Store dispatch internally will do 2 things. First, it calls reducer which passes to createStore method. Second, and then execute callback subscribed by store. Reducer accepts previous state, actionType as parameters and then return next state. All callback methods in subscribers array will be executed. Usually cb will getState() to re-render view.**
+**When there is any click event, clickHandler will call a specific action. This action calls store.dispatch with actionType and payload. Store dispatch internally will do 2 things. First, it calls reducer which passes to createStore method. Second, and then execute callback subscribed by store. Reducer accepts previous state, actionType as parameters and then return next state. All callback methods in subscribers array will be executed. Usually cb will getState() to re-render view.**
 
 ### Reducer
 
@@ -328,7 +273,7 @@ export default function createStore(reducer, initialState) {
 Stores allow you to subscribe handler functions that are invoked every time the store completes dispatching an action. In the following example, we will log the count of colors in the state:
 
 ```javascript
-store.subscribe(() => 
+store.subscribe(() =>
     console.log('color count:', store.getState().colors.length)
 )
 
@@ -387,7 +332,7 @@ Using the store’s subscribe function, we will listen for state changes and sav
 ```javascript
 const store = createStore(
     combineReducers({ colors, sort }),
-    (localStorage['redux-store']) ? 
+    (localStorage['redux-store']) ?
         JSON.parse(localStorage['redux-store']) :
         {}
 )
@@ -415,17 +360,18 @@ To recap, stores hold and manage state data in Redux applications, and the only 
 Action objects are simply JavaScript literals. Action creators are functions that create and return these literals. Let’s consider the following actions:
 
 ```json
-{ 
-  type: "REMOVE_COLOR", 
+{
+  type: "REMOVE_COLOR",
   id: "3315e1p5-3abl-0p523-30e4-8001l8yf2412"
 }
 
-{ 
-  type: "RATE_COLOR", 
-  id: "441e0p2-9ab4-0p523-30e4-8001l8yf2412", 
-  rating: 5 
+{
+  type: "RATE_COLOR",
+  id: "441e0p2-9ab4-0p523-30e4-8001l8yf2412",
+  rating: 5
 }
 ```
+
 We can simplify the logic involved with generating an action by adding an action creators for each of these action types:
 
 ```javascript
@@ -516,9 +462,9 @@ store.dispatch( addColor("#F142FF", "Party Pink") )
 
 The really nice thing about action creators is that they provide a place to encapsulate all of the logic required to successfully create an action. The addColor action creator handles everything associated with adding new colors, including providing unique IDs and timestamping the action. It is all in one place, which makes debugging our application much easier.
 
-**Action creators are where we should put any logic for communicating with backend APIs**. With an action creator, we can perform asynchronous logic like requesting data or making an API call. 
+**Action creators are where we should put any logic for communicating with backend APIs**. With an action creator, we can perform asynchronous logic like requesting data or making an API call.
 
-# Difference between Redux and Flux
+## Difference between Redux and Flux
 
 1. Redux only has one centralized store while flux has many
 1. Redux doesn't need dispatcher

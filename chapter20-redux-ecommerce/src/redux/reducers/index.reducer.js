@@ -1,3 +1,6 @@
+/**
+ * 把所有 reducers 统一返回
+ */
 import { combineReducers } from 'redux';
 
 import activeCategoryReducer from './activeCategory.reducer';

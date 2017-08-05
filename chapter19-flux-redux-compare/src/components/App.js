@@ -82,6 +82,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    // 被订阅的callback方法会在dispatch通过reducer计算出新state后执行
     this.props.store.subscribe(this._onChange);
   }
 
