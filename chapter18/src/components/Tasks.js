@@ -19,7 +19,7 @@ export default class Tasks extends React.Component {
       tasks: taskStore.getTasks()
     };
 
-    this.addHandler = this.addHandler.bind(this);
+    this.addNewTask = this.addNewTask.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -37,7 +37,8 @@ export default class Tasks extends React.Component {
     taskStore.removeChangeListener(this._onChange);
   }
 
-  addHandler() {
+  addNewTask() {
+    const tasks = this.state.tasks.length === 0 ? [] : this.state.tasks.slice(0);
     /*
     1. call action with data. 
     2. action sends ajax post request to db, in callback dispatcher sends actionType, data to store
@@ -60,7 +61,7 @@ export default class Tasks extends React.Component {
       <div>
         <div className="addTask">
           <input className="form-control" ref={(a) => { this.input = a; }} type="text" />
-          <Button className="-secondary" onClick={this.addHandler}>Add Task</Button>
+          <Button className="-secondary" onClick={this.addNewTask}>Add Task</Button>
         </div>
         {taskArr}
       </div>

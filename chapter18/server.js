@@ -8,10 +8,10 @@ const mongoose = require('./config/mongoose'),
 	express = require('./config/express');
 
 // Create a new Mongoose connection instance
-var db = mongoose();
+const db = mongoose();
 
 // Create a new Express application instance
-var app = express(db);
+const app = express(db);
 
 app.listen(3000, () => {
 	console.log("We are running a server on port 3000");

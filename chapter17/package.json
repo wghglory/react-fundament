@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack && nodemon server",
-    "fix": "node_modules/.bin/eslint 'app/**/*.js' --fix",
-    "lint": "./node_modules/.bin/eslint .",
+    "fix": "node_modules/.bin/eslint .js src --fix",
+    "lint": "./node_modules/.bin/eslint .js src",
     "prod": "npm run build && NODE_ENV=production nodemon server",
     "build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",
     "firebase-init": "firebase login && firebase init",
