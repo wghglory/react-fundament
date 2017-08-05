@@ -1,6 +1,6 @@
-We're going to build Navbar by react router
+# Build Navbar by react router
 
-# react-router-dom
+## react-router-dom
 
 Route exact means exactly match the path. Take `<Route exact path='/' component={Home} />` for example. If we navigate to _localhost/popular_, without exact keyword, Home component still matches this route.
 
@@ -80,7 +80,7 @@ class Home extends React.Component {
 module.exports = Home;
 ```
 
-# Avoiding refreshing not found
+#@ Avoiding refreshing not found
 
 If we refresh page _localhost/popular_, you will see the page is not found, because our server tries to access folder popular which doesn't exist. So we include `publicPath` and `histroyApiFallback:true`. This means when we refresh and request _localhost/popular_, the server tries to request _localhost/_, and then react router works on _/popular_.
 

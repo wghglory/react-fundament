@@ -1,11 +1,11 @@
-const React = require('react')
+import React from 'react';
 
 class Battle extends React.Component {
   render() {
     return (
       <div>Battle!</div>
-    )
+    );
   }
 }
 
-module.exports = Battle;
+export default Battle;

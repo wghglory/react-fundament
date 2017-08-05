@@ -1,12 +1,12 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const api = require('../utils/api')
+import React from 'react';
+import PropTypes from 'prop-types';
+import {fetchPopularRepos} from '../utils/api';
 
 // Below is a private component: for now only Popular uses this rendered view, so I don't create a file for it
 /*class SelectedLanguage extends React.Component{
   render(){
     const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
-    
+
     // note: "this" inside es6 arrow function is same with outer scope, so no need to pass this context to map
     return (
       <ul className="languages">
@@ -26,22 +26,29 @@ const api = require('../utils/api')
 }*/
 
 function SelectedLanguage(props) {
-  const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
+  const languages = [
+    'All',
+    'Javascript',
+    'Java',
+    'Ruby',
+    'CSS',
+    'Python'
+  ];
 
   return (
     <ul className="languages">
-      {languages.map(lang =>
-        (
-          <li
-            onClick={props.onSelect.bind(null, lang)}
-            style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
-            key={lang}>
-            {lang}
-          </li>
-        )
-      )}
+      {languages.map(lang => (
+        <li
+          onClick={props.onSelect.bind(null, lang)}
+          style={lang === props.selectedLanguage ? {
+          color: '#d0021b'
+        } : null}
+          key={lang}>
+          {lang}
+        </li>
+      ))}
     </ul>
-  )
+  );
 }
 
 SelectedLanguage.propTypes = {
@@ -58,26 +65,25 @@ function RepoGrid(props) {
             <div className='popular-rank'>#{index + 1}</div>
             <ul className='space-list-items'>
               <li>
-                <img
-                  className='avatar'
-                  src={repo.owner.avatar_url}
-                  alt={'Avatar for ' + repo.owner.login}
-                />
+                <img className='avatar' src={repo.owner.avatar_url} alt={'Avatar for ' + repo.owner.login}/>
               </li>
-              <li><a href={repo.html_url}>{repo.name}</a></li>
+              <li>
+                <a href={repo.html_url}>{repo.name}</a>
+              </li>
               <li>@{repo.owner.login}</li>
-              <li>{repo.stargazers_count} stars</li>
+              <li>{repo.stargazers_count}
+                stars</li>
             </ul>
           </li>
-        )
+        );
       })}
     </ul>
-  )
+  );
 }
 
 RepoGrid.propTypes = {
-  repos: PropTypes.array.isRequired,
-}
+  repos: PropTypes.array.isRequired
+};
 
 class Popular extends React.Component {
   constructor(props) {
@@ -91,34 +97,36 @@ class Popular extends React.Component {
   }
 
   componentDidMount() {
-    this.updateLanguage(this.state.selectedLanguage)
+    this.updateLanguage(this.state.selectedLanguage);
+    this._isMount = true;
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
   }
 
   updateLanguage(lang) {
-    this.setState({ selectedLanguage: lang, repos: null });
+    this.setState({selectedLanguage: lang, repos: null});
 
-    api.fetchPopularRepos(lang)
-      .then(function (repos) {
+    fetchPopularRepos(lang).then(function (repos) {
+
+      if (this._isMount) {
         this.setState(function () {
-          return {
-            repos: repos
-          }
+          return {repos: repos};
         });
-      }.bind(this));
+      }
+
+    }.bind(this));
 
   }
+
   render() {
     return (
       <div>
-        <SelectedLanguage
-          selectedLanguage={this.state.selectedLanguage}
-          onSelect={this.updateLanguage} />
-        {!this.state.repos
-          ? <p>LOADING!</p>
-          : <RepoGrid repos={this.state.repos} />}
+        <SelectedLanguage selectedLanguage={this.state.selectedLanguage} onSelect={this.updateLanguage}/> {!this.state.repos ? <p>LOADING!</p> : <RepoGrid repos={this.state.repos}/>}
       </div>
-    )
+    );
   }
 }
 
-module.exports = Popular;
+export default Popular;
