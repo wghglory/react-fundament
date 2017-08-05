@@ -1,7 +1,7 @@
-const React = require('react');
-const Link = require('react-router-dom').Link;
+import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
 
-class Home extends React.Component {
+export default class Home extends React.Component {
   render() {
     return (
       <div className="home-container">
@@ -11,5 +11,3 @@ class Home extends React.Component {
     );
   }
 }
-
-module.exports = Home;

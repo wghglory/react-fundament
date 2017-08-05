@@ -1,9 +1,9 @@
-We're going to do these:
+# CSS and SCSS
 
-* css separation from js -- wepback config
+* css separation from js -- webpack config
 * sass
 
-# Separate css
+## Separate css
 
 ```bash
 npm i extract-text-webpack-plugin --save-dev
@@ -35,7 +35,7 @@ const config = {
 
 Now when you `npm run build`, build.css is separated from js.
 
-# Sass
+## Sass
 
 Prepare: cut index.css content into index.scss and update as needed
 

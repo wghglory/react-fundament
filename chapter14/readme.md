@@ -1,4 +1,4 @@
-# Introduct bootstrap 4
+# bootstrap 4
 
 Bootstrap 4 is built by Scss rather than Less! I don't want to import the whole bootstrap. In this chapter, I want to use bootstrap button and jumbotron. Let's see we're gonna achieve this feature.
 
@@ -31,7 +31,7 @@ import '../bootstrap/jumbotron.scss';
 **The good things above**:
 
 1. each component can have its own scss files
-1. bootstrap core styles are overrided by our custom css
+1. bootstrap core styles are override by our custom css
 1. component's bootstrap scss won't conflicts with our custom css, although they load later than custom css
 
 ## Remove duplicate css
@@ -55,7 +55,7 @@ plugins: [
 
 Now, there should be no duplicate css.
 
-# Use ES6 import instead CommonJS require
+## Use ES6 import instead CommonJS require
 
 Take Home.js for ie: `export default` and remove `module.exports = Home`
 
@@ -82,27 +82,49 @@ Now in App.js
 + import Home from './Home';
 ```
 
-# Animation
+## Animation
 
 * Native css3 animation for h1 with className animation.
-* animation for Battle Link by react-transition-group. 
+* animation for Battle Link by **react-transition-group(^2.2.0)**
 
 Home.js
 
 ```diff
-const React = require('react');
-const Link = require('react-router-dom').Link;
-+ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import '../bootstrap/jumbotron.scss';
+
+import React from 'react';
+import {Link} from 'react-router-dom';
++ import {TransitionGroup, CSSTransition} from 'react-transition-group'  //https://reactcommunity.org/react-transition-group/
+
+
++ const FadeTransition = (props) => (<CSSTransition {...props} classNames="animation" timeout={{
++   enter: 500,
++   exit: 300
++ }}/>);
 
 export default class Home extends React.Component {
   render() {
+    /* return (
+      <div className="home-container jumbotron">
+        <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-transition-group.</h1>
+        <TransitionGroup>
+          <CSSTransition classNames="animation" timeout={{
+            enter: 2000,
+            exit: 500
+          }}>
+            <Link className="button" to="/battle">Battle</Link>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
+    ); */
     return (
       <div className="home-container jumbotron">
-+       <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-transition-group.</h1>
-+       <CSSTransitionGroup transitionName="animation" transitionAppear={true} transitionAppearTimeout={2000}
-+          transitionEnterTimeout={2000} transitionLeaveTimeout={500}>
-          <Link className="button" to="/battle">Battle</Link>
-+       </CSSTransitionGroup>
+        <h1 className="animation">Github Battle: Battle your friends. h1: native css3 animation; button: react-transition-group.</h1>
++        <TransitionGroup>
++          <FadeTransition>
+            <Link className="button" to="/battle">Battle</Link>
++          </FadeTransition>
++        </TransitionGroup>
       </div>
     );
   }
@@ -150,7 +172,7 @@ index.scss
   }
 }
 
-.animation-leave {
+.animation-exit {
   opacity: 1;
   &-active {
     opacity: 0;
@@ -160,9 +182,9 @@ index.scss
 }
 ```
 
-# Webpack dev, production 2 files
+## Webpack dev, production 2 files
 
 1. create a webpack.production.config.js
-2. package.json scripts: `"build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",`
+1. package.json scripts: `"build": "NODE_ENV='production' webpack --config ./webpack.production.config.js -p",`
 
 Now when you build for production, css name can be changed like "build.min.css"
