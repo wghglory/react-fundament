@@ -1,4 +1,6 @@
-# MVC 
+# FLux
+
+## MVC
 
 Pros:
 
@@ -8,11 +10,11 @@ Pros:
 
 Cons:
 
-Sometimes your view may show several kinds of models, so it's hard to manage the relationship bewteen view and model mappings. i.e, At first, you have a product view showing only product list. When project gets larger, this view may need include user model, comment model, etc. And other views may have the same issue. These dependencies are difficult to manage, and maybe there're cyclic dependencies. In Asp.net MVC, the solution is create a viewModel. But you have to write extra code about viewModel.
+Sometimes your view may show several kinds of models, so it's hard to manage the relationship between view and model mappings. i.e, At first, you have a product view showing only product list. When project gets larger, this view may need include user model, comment model, etc. And other views may have the same issue. These dependencies are difficult to manage, and maybe there're cyclic dependencies. In Asp.net MVC, the solution is create a viewModel. But you have to write extra code about viewModel.
 
 2nd, losing control of your data flow. In general the data flow is bi-directional. The user input in one component can affect other components and vice versa. By using Redux we’re solving this problem by introducing a central data store in our application. The store contains the state of the application and is the source of truth for components. By using the store concept you do not need to synchronize state between components manually. Instead you can fully rely on the Redux store at any time.
 
-# Flux architecture
+## Flux architecture
 
 Due to the MVC shortcomings, Facebook has a view including message list, a small message window, message indicator on right conner. They use flux to manage the message state.
 
@@ -22,13 +24,13 @@ view(jsx) --> actions --> dispatcher(singleton, make sure action is handler one 
 
 In Flux, application state data is managed outside of React components in stores. Stores hold and change the data, and are the only thing that can update a view in Flux. If a user were to interact with a web page. Say, click a button or submit a form—then an action would be created to represent the user’s request. An action provides the instructions and data required to make a change. Actions are dispatched using a central control component called the dispatcher. The dispatcher is designed to queue up our actions and dispatch them to the appropriate store. Once a store receives an action, it will use it as instructions to modify state and update the view. Data flows in one direction: action to a dispatcher to the store and finally to the view.
 
-### Flow in detail:
+### Flow in detail
 
-1. component element click event --> eventHandler calls action 
-2. action function sends ajax to server, callback calls dispatcher
-3. dispatcher sends actionType and data to store
-4. store manages data internally according to the actionType, data from dispatcher, then emit event. 
-5. Component listener, registered in componentDidMount, notices that and setState, which calls store getTasks(). State update will re-render.
+1. component element click event --> eventHandler calls action
+1. action function sends ajax to server, callback calls dispatcher
+1. dispatcher sends actionType and data to store
+1. store manages data internally according to the actionType, data from dispatcher, then emit event.
+1. Component listener, registered in componentDidMount, notices that and setState, which calls store getTasks(). State update will re-render.
 
 <img src="http://om1o84p1p.bkt.clouddn.com/flux.png"  />
 
@@ -251,7 +253,7 @@ export default class Task extends React.Component {
 	removeHandler() {
 		removeTask({ _id: this.props.id });
 	}
-	render() {
+  render() {
 		return (
 			<p className="alert alert-danger clear">
 				{this.props.children}
@@ -262,8 +264,8 @@ export default class Task extends React.Component {
 }
 
 Task.propTypes = {
-	id: PropTypes.number.isRequired,
-	children: PropTypes.string.isRequired
+  id: PropTypes.number.isRequired,
+  children: PropTypes.string.isRequired
 };
 ```
 

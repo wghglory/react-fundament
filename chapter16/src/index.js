@@ -1,16 +1,14 @@
-const React = require('react');
-const ReactDom = require('react-dom');
-
 // bootstrap core. specific plugin like jumbotron is imported in needed component.
 import './bootstrap/_core.scss';
 
 // custom css below bootstrap
-require('./index.css');
-require('./index.scss');
+import './index.css';
+import './index.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
 
-const App = require('./components/App');
-
-ReactDom.render(
+ReactDOM.render(
     <App/>,
     document.getElementById('app')
 );

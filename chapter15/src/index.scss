@@ -39,7 +39,7 @@ $buttonBackground:#0a0a0a;
   }
 }
 
-.animation-leave {
+.animation-exit {
   opacity: 1;
   &-active {
     opacity: 0;
@@ -177,8 +177,4 @@ li {
   text-align: center;
   font-size: 30px;
   font-weight: 200;
-}
-
-.d3header{
-  text-align: center;
 }

@@ -1,56 +1,62 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html injecting index_bundle.js in dist folder
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 const config = {
-  entry: './app/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js',
-    publicPath: '/'
-  },
-  devServer: {
-    historyApiFallback: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
-      },
-      // {
-      //   test: /\.json$/,
-      //   loader: 'json-loader'
-      // }, 
-      {
-        test: /\.csv$/,
-        loader: 'dsv-loader'
-      }
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index_bundle.js',
+        publicPath: '/'
+    },
+    devtool: 'source-map', // debug source from chrome debugger
+    devServer: {
+        historyApiFallback: true,
+    },
+    module: {
+        rules: [{
+                test: /\.(js)$/,
+                use: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
+            },
+            // {
+            //   test: /\.json$/,
+            //   loader: 'json-loader'
+            // }, 
+            {
+                test: /\.csv$/,
+                loader: 'dsv-loader'
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            }
+        }),
+        new ExtractTextPlugin('build.css')
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'app/index.html'
-    }),
-    new ExtractTextPlugin('build.css')
-  ]
 };
 
 /*// 1. package.json npm run build will set node env production. 
@@ -68,4 +74,3 @@ if (process.env.NODE_ENV === 'production') {
 */
 
 module.exports = config;
-

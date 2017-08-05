@@ -65,7 +65,7 @@ export default function Visualization() {
 }
 ```
 
-Chart.js: 
+Chart.js:
 
 > note `ref` is jquery-like way to get element. Using `ref` is uncontrolled component. Don't use it frequently unless necessary.
 
@@ -284,7 +284,7 @@ export default class Timeline extends React.Component {
 }*/
 ```
 
-# Use Javascript fetch API instead of axios
+## Use Javascript fetch API instead of axios
 
 As of May 11, 2017, [fetch is still an experimental technology](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). Its api may change in future.
 
@@ -358,7 +358,7 @@ module.exports = {
       .then(sortPlayers)
       .catch(handleError);
   },
-  
+
   fetchPopularRepos: function (language) {
     const encodedURI = window.encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
 

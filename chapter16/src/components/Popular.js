@@ -1,33 +1,10 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const api = require('../utils/api');
-
-const Loading = require('./Loading');
+import React from 'react';
+import PropTypes from 'prop-types';
+import {fetchPopularRepos} from '../utils/api';
+import Loading from './Loading';
 
 // Below is a private component: for now only Popular uses this rendered view, so I don't create a file for it
-/*class SelectedLanguage extends React.Component{
-  render(){
-    const languages = ['All', 'Javascript', 'Java', 'Ruby', 'CSS', 'Python'];
-    
-    // note: "this" inside es6 arrow function is same with outer scope, so no need to pass this context to map
-    return (
-      <ul className="languages">
-        {languages.map(lang=>
-          (
-            <li
-              onClick={this.props.onSelect.bind(null, lang)}
-              style={lang === this.props.selectedLanguage ? { color: '#d0021b' } : null}
-              key={lang}>
-              {lang}
-            </li>
-          )
-        )}
-      </ul>
-    )
-  }
-}*/
-
-function SelectedLanguage(props) {
+ function SelectedLanguage(props) {
   const languages = ['All', 'Javascript', 'Csharp', 'Java', 'Ruby', 'CSS', 'Python'];
 
   return (
@@ -35,7 +12,6 @@ function SelectedLanguage(props) {
       {languages.map(lang =>
         (
           <li
-            // onClick={props.onSelect.bind(null, lang)}  // Solution 1 only
             onClick={props.onSelect.bind(null, { lang, url: `https://api.github.com/search/repositories?q=stars:>1+language:${lang}&sort=stars&order=desc&type=Repositories` })}  // Other solutions
             style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
             key={lang}>
@@ -54,7 +30,7 @@ SelectedLanguage.propTypes = {
 
 SelectedLanguage.defaultProps = {
   selectedLanguage: 'All'
-};
+}; 
 
 function RepoGrid(props) {
   return (
@@ -86,7 +62,35 @@ RepoGrid.propTypes = {
   repos: PropTypes.array.isRequired,
 };
 
-/* Solution 1:
+/* //  Solution 1: normal
+
+function SelectedLanguage(props) {
+  const languages = ['All', 'Javascript', 'Csharp', 'Java', 'Ruby', 'CSS', 'Python'];
+
+  return (
+    <ul className="languages">
+      {languages.map(lang =>
+        (
+          <li
+            onClick={props.onSelect.bind(null, lang)}
+            style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
+            key={lang}>
+            {lang}
+          </li>
+        )
+      )}
+    </ul>
+  );
+}
+
+SelectedLanguage.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
+};
+
+SelectedLanguage.defaultProps = {
+  selectedLanguage: 'All'
+};
 
 class Popular extends React.Component {
   constructor(props) {
@@ -101,21 +105,28 @@ class Popular extends React.Component {
 
   componentDidMount() {
     this.updateLanguage(this.state.selectedLanguage);
+    this._isMount = true;
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
   }
 
   updateLanguage(lang) {
-    this.setState({ selectedLanguage: lang, repos: null });
+    this.setState({selectedLanguage: lang, repos: null});
 
-    api.fetchPopularRepos(lang)
-      .then(function (repos) {
+    fetchPopularRepos(lang).then(function (repos) {
+
+      if (this._isMount) {
         this.setState(function () {
-          return {
-            repos: repos
-          };
+          return {repos: repos};
         });
-      }.bind(this));
+      }
+
+    }.bind(this));
 
   }
+
   render() {
     return (
       <div>
@@ -130,10 +141,10 @@ class Popular extends React.Component {
   }
 }
 
-module.exports = Popular;*/
+export default Popular; */
 
 
-/*// Solution 2: HOC
+/* // Solution 2: HOC
 
 import DataComponent from './DataComponent';
 
@@ -162,12 +173,12 @@ const Popular = DataComponent(
   window.encodeURI("https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories")
 );
 
-module.exports = Popular;*/
+export default Popular; */
 
 
-/*// Solution 3: refs
+// Solution 3: refs
 
-import DataComponent from './DataComponent';
+/* import DataComponent from './DataComponent';
 
 const RepoList = props => {
   // console.log(props)
@@ -214,10 +225,10 @@ class Popular extends React.Component {
   }
 }
 
-module.exports = Popular;*/
+export default Popular; */
 
 
-// Solution 4: componentWillReceiveProps
+ // Solution 4: componentWillReceiveProps
 import DataComponent from './DataComponent';
 
 const RepoList = props => <RepoGrid repos={props.data} />;
@@ -247,7 +258,6 @@ class Popular extends React.Component {
     // solution 4 doesn't call below method to make new request and setState
     // When selectedLanguage updates, PopularView's param props changes,
     // DataComponent's componentWillReceiveProps(nextProps) will be called, where we fetch and setState
-    // this.pv.fetchByParam(param);
   }
 
   render() {
@@ -260,6 +270,6 @@ class Popular extends React.Component {
       </div>
     );
   }
-}
+} 
 
-module.exports = Popular;
+export default Popular;

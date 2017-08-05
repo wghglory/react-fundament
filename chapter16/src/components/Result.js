@@ -1,11 +1,11 @@
 // http://localhost:8083/battle/result?playerOneName=wghglory&playerTwoName=ryanflorence
-const React = require('react');
-const PropTypes = require('prop-types');
-const queryString = require('query-string');
-const api = require('../utils/api');
-const Link = require('react-router-dom').Link;
-const PlayerPreview = require('./PlayerPreview');
-const Loading = require('./Loading');
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import queryString from 'query-string';
+import {battle} from '../utils/api';
+import PlayerPreview from './PlayerPreview';
+import Loading from './Loading';
 
 function Profile(props) {
   let info = props.info;
@@ -58,7 +58,7 @@ class Result extends React.Component {
   componentDidMount() {
     let players = queryString.parse(this.props.location.search);
 
-    api.battle([
+    battle([
       players.playerOneName,
       players.playerTwoName
     ]).then(function (players) {
@@ -117,16 +117,4 @@ class Result extends React.Component {
   }
 }
 
-Result.propTypes = {
-  location: PropTypes.shape({
-    search: PropTypes.string.isRequired,
-  }),
-};
-
-Result.defaultProps = {
-  location: {
-    search: '',
-  },
-};
-
-module.exports = Result;
+export default Result;
